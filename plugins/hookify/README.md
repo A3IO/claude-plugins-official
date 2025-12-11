@@ -278,9 +278,9 @@ Hookify supports two rule scopes:
 
 | Global Rule | Local Rule | Result |
 |-------------|------------|--------|
-| `warn-bash-shebang` | — | Global active |
-| `warn-bash-shebang` | `warn-bash-shebang` | **Local replaces global** |
-| `warn-bash-shebang` | `my-other-rule` | **Both active** (different names) |
+| `bash-shebang` | — | Global active |
+| `bash-shebang` | `bash-shebang` | **Local replaces global** |
+| `bash-shebang` | `my-other-rule` | **Both active** (different names) |
 
 ### Disabling a Global Rule Locally
 
@@ -289,13 +289,13 @@ Create a local rule with the same `name:` and `enabled: false`:
 ```markdown
 # .claude/hookify.bash-shebang.local.md
 ---
-name: warn-bash-shebang
+name: bash-shebang
 enabled: false
 event: file
 ---
 ```
 
-This disables the global `warn-bash-shebang` rule for this project only.
+This disables the global `bash-shebang` rule for this project only.
 
 ## Management
 

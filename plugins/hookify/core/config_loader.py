@@ -216,22 +216,16 @@ def load_rules(event: Optional[str] = None) -> List[Rule]:
 
     # 1. Load global rules first
     for file_path in glob.glob(global_pattern):
-        try:
-            rule = load_rule_file(file_path)
-            if rule:
-                rules_by_name[rule.name] = rule
-        except Exception as e:
-            print(f"Warning: Failed to load {file_path}: {e}", file=sys.stderr)
+        rule = load_rule_file(file_path)
+        if rule:
+            rules_by_name[rule.name] = rule
 
     # 2. Load local rules (override global by name)
     for file_path in glob.glob(local_pattern):
-        try:
-            rule = load_rule_file(file_path)
-            if rule:
-                # Local overrides global with same name
-                rules_by_name[rule.name] = rule
-        except Exception as e:
-            print(f"Warning: Failed to load {file_path}: {e}", file=sys.stderr)
+        rule = load_rule_file(file_path)
+        if rule:
+            # Local overrides global with same name
+            rules_by_name[rule.name] = rule
 
     # 3. Filter by event and enabled status
     rules = []

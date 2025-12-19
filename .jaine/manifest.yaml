@@ -1,0 +1,78 @@
+# JAINE Plugins Manifest
+# Tracks modifications to upstream plugins for deterministic sync
+#
+# This file is automatically updated by sync.sh
+# Manual edits are allowed for description and pr_number fields
+
+version: "1.0"
+upstream_remote: "upstream"
+upstream_branch: "main"
+upstream_commit: "6d3752c"
+last_sync: "2025-12-19T22:36:00Z"
+
+# Our modifications to upstream plugins
+modifications:
+  hookify:
+    description: "Added global rules support (~/.claude/)"
+    pr_number: 5
+    pr_url: "https://github.com/anthropics/claude-plugins-official/pull/5"
+    files:
+      - path: "plugins/hookify/core/config_loader.py"
+        type: "modified"
+        our_checksum: "ff7a62a9ae5e5c7facc38da326b18377"
+        description: "Core logic for loading global + local rules"
+
+      - path: "plugins/hookify/README.md"
+        type: "modified"
+        our_checksum: "787041147d5bdfca09c5391891263d91"
+        description: "Documentation for global rules feature"
+
+      - path: "plugins/hookify/commands/help.md"
+        type: "modified"
+        our_checksum: "f08b93551e92fce3d6a3e68266234ea4"
+        description: "Updated help text"
+
+      - path: "plugins/hookify/commands/hookify.md"
+        type: "modified"
+        our_checksum: "0094364735112df868a6aa3223203ce5"
+        description: "Added scope question for rule creation"
+
+      - path: "plugins/hookify/skills/writing-rules/SKILL.md"
+        type: "modified"
+        our_checksum: "7caaf04614aa12596cc2a832f3e01e0c"
+        description: "Updated skill docs for global rules"
+
+# Infrastructure modifications (not plugin code)
+infrastructure:
+  - path: ".claude-plugin/marketplace.json"
+    type: "modified"
+    description: "Renamed to jaine-plugins"
+
+  - path: ".jaine/"
+    type: "added"
+    description: "JAINE infrastructure directory"
+
+# Plugins we don't modify - sync as-is from upstream
+unmodified_plugins:
+  - agent-sdk-dev
+  - clangd-lsp
+  - code-review
+  - commit-commands
+  - csharp-lsp
+  - example-plugin
+  - explanatory-output-style
+  - feature-dev
+  - frontend-design
+  - gopls-lsp
+  - jdtls-lsp
+  - learning-output-style
+  - lua-lsp
+  - php-lsp
+  - plugin-dev
+  - pr-review-toolkit
+  - pyright-lsp
+  - ralph-wiggum
+  - rust-analyzer-lsp
+  - security-guidance
+  - swift-lsp
+  - typescript-lsp

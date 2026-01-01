@@ -1,6 +1,6 @@
 {
   "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
-  "name": "jaine-plugins",
+  "name": "jaine-custom",
   "description": "JAINE custom plugins - vendor analysis, automation, and AI workflows",
   "owner": {
     "name": "JAINE",

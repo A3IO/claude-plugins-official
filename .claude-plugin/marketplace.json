@@ -1,0 +1,22 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "jaine-plugins",
+  "description": "JAINE custom plugins - vendor analysis, automation, and AI workflows",
+  "owner": {
+    "name": "JAINE",
+    "email": "jaine@local"
+  },
+  "plugins": [
+    {
+      "name": "vendor-analyzer",
+      "description": "Exhaustive vendor codebase analysis with 5-agent pipeline generating Obsidian-compatible documentation vault",
+      "version": "0.1.0",
+      "author": {
+        "name": "JAINE",
+        "email": "jaine@local"
+      },
+      "source": "./plugins/vendor-analyzer",
+      "category": "development"
+    }
+  ]
+}

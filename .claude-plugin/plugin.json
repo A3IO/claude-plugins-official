@@ -1,9 +1,0 @@
-{
-  "name": "jaine-plugins",
-  "version": "0.1.0",
-  "description": "JAINE custom plugins for Claude Code - vendor analysis, automation, and AI workflows",
-  "author": {
-    "name": "JAINE",
-    "email": "jaine@local"
-  }
-}

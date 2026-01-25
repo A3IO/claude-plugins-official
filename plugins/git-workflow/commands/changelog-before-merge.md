@@ -1,72 +1,52 @@
 ---
 description: Analyze git diff between branches and generate comprehensive BRANCH_CHANGELOG.md. Use before creating pull requests to document all changes with commit history, file analysis, bug fixes, architecture diagrams, and related issues.
 argument-hint: "[target-branch] [--depth thorough|standard] [--lang ru|en]"
-allowed-tools: ["Read", "Grep", "Glob", "Bash", "Write", "Task", "mcp__sequentialthinking__sequentialthinking"]
+allowed-tools: ["Task", "Bash"]
 ---
 
 # Changelog Before Merge
 
-Generate comprehensive changelog using the **changelog-analyzer** agent.
+**IMMEDIATELY use the Task tool to launch the changelog-analyzer agent.**
 
-## CRITICAL: Launch Agent
+Do NOT attempt to generate the changelog yourself. The changelog-analyzer agent has:
+- Model: **opus** (required for deep analysis)
+- Sequential thinking capabilities
+- Code verification expertise
 
-**YOU MUST use the Task tool to launch the `changelog-analyzer` agent!**
-
-The changelog-analyzer agent has:
-- Model: **opus** (for deep analysis)
-- Sequential thinking (ultrathink)
-- Code verification capabilities
-
-## Execution
-
-### Step 1: Parse Arguments
-
-Extract from $ARGUMENTS:
-- `target_branch` - Target branch for diff (default: auto-detect)
-- `depth` - Analysis depth: standard or thorough (default: standard)
-- `lang` - Output language: ru or en (default: ru)
-
-### Step 2: Detect Current Branch
+## Step 1: Get Current Branch
 
 ```bash
 git rev-parse --abbrev-ref HEAD
 ```
 
-Auto-detect target:
-- `jaine-speech/fix/foo` → target = `jaine-speech/main`
+## Step 2: Determine Target Branch
+
+If $ARGUMENTS contains target branch, use it.
+Otherwise auto-detect:
+- `product/fix/foo` → target = `product/main`
 - `feat/bar` → target = `main`
 
-### Step 3: Launch changelog-analyzer Agent
+## Step 3: Launch Agent NOW
 
-**USE TASK TOOL NOW:**
+**Call the Task tool with subagent_type="changelog-analyzer":**
 
+Prompt for the agent:
 ```
-Launch the changelog-analyzer agent with this prompt:
+Analyze git diff for changelog generation.
 
-"Analyze git diff between current branch and {target_branch}.
-Depth: {depth}
-Language: {lang}
+Current branch: {CURRENT_BRANCH}
+Target branch: {TARGET_BRANCH}
+Depth: {depth from args, default: standard}
+Language: {lang from args, default: ru}
 
-Generate comprehensive BRANCH_CHANGELOG with:
-1. Executive Summary with emoji bullets
-2. Statistics table
-3. Commit history and distribution
-4. Architecture changes with Mermaid diagrams
-5. Bug fixes with Root Cause Analysis
-6. New features with usage examples
-7. Breaking changes and migration
-8. Related issues
-9. File-by-file analysis
-10. Code Verification Report
+Generate comprehensive BRANCH_CHANGELOG.md with all required sections.
+Output to: docs/{YYYY-MM-DD}_BRANCH_CHANGELOG_{branch}_{PR}.md
 
-Output: docs/{YYYY-MM-DD}_BRANCH_CHANGELOG_{branch}_{PR}.md
-
-CRITICAL: After generating draft, verify ALL claims against actual code!"
+CRITICAL: Verify all claims against actual code before finalizing!
 ```
 
-### Step 4: Report Completion
+## Step 4: Report Result
 
-After agent completes, report:
-- Output file path
-- Summary of changes
-- Any issues found during verification
+After agent completes, show the user:
+- Path to generated changelog
+- Brief summary of what was documented

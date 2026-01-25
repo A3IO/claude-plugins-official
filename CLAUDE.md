@@ -75,10 +75,8 @@ plugins/
 ---
 name: my-skill
 description: >
-  Use this skill when the user asks to "do X", "perform Y"...
-context: fork              # ⭐ ОБЯЗАТЕЛЬНО для агента!
-agent: my-custom-agent     # ⭐ Ссылка на агента из agents/
-allowed-tools: Read, Grep, Glob, Bash, Write
+  This skill should be used when the user asks to "do X", "perform Y"...
+  Include specific trigger phrases that match user queries.
 ---
 
 # Skill Title
@@ -91,10 +89,11 @@ Instructions for the skill...
 | Поле | Обязательно | Описание |
 |------|-------------|----------|
 | `name` | ✅ | Идентификатор skill |
-| `description` | ✅ | Для AI — когда использовать |
-| `context` | Для агента | `fork` — изолированный контекст |
-| `agent` | Опционально | Имя агента из `agents/` |
-| `allowed-tools` | Опционально | Доступные инструменты |
+| `description` | ✅ | Third-person: "This skill should be used when..." |
+| `version` | ❌ | Опциональная версия |
+
+**⚠️ ВАЖНО:** Skills НЕ поддерживают поля `context`, `agent`, `allowed-tools`!
+Agents вызываются через Task tool в теле skill или через их description.
 
 ---
 

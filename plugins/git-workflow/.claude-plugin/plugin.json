@@ -1,0 +1,11 @@
+{
+  "name": "git-workflow",
+  "version": "1.4.0",
+  "description": "Git workflow automation with skills: changelog generation (ISO 8601 filenames, clickable Issue/PR links, code verification, Mermaid diagrams). Migrated from commands to skills pattern. Russian by default.",
+  "author": {
+    "name": "JAINE",
+    "email": "jaine@local"
+  },
+  "keywords": ["git", "changelog", "skill", "merge", "pr", "workflow", "forgejo", "verification"],
+  "repository": "https://github.com/jaine/plugins"
+}

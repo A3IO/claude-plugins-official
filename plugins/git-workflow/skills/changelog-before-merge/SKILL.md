@@ -5,6 +5,9 @@ description: >
   "analyze changes before merge", "document PR changes", "what changed",
   "create branch changelog", or needs comprehensive git diff analysis
   with commit history, bug fixes, architecture diagrams, and related issues.
+context: fork
+agent: changelog-analyzer
+allowed-tools: Read, Grep, Glob, Bash, Write, mcp__sequentialthinking__sequentialthinking
 ---
 
 # Changelog Before Merge

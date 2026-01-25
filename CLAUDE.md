@@ -18,38 +18,132 @@
 
 ---
 
-## Структура плагина
+## ⚠️ КРИТИЧНО: Skills vs Commands
 
-### Правильная структура
+### Ключевое различие
+
+| Компонент | Назначение | Появляется в `/` меню? |
+|-----------|------------|------------------------|
+| `commands/` | **Slash-команды** — активные действия | ✅ ДА |
+| `skills/` | **Knowledge bases** — пассивное знание | ❌ НЕТ |
+
+**Skills НЕ появляются в меню `/`!** Skills загружаются автоматически когда триггеры в description совпадают с запросом пользователя.
+
+### Правильный паттерн (vendor-analyzer)
+
+```
+plugins/vendor-analyzer/
+├── commands/
+│   └── analyze.md        # ⭐ ЭТО появляется как /analyze
+├── skills/
+│   └── analyze/
+│       └── SKILL.md      # Дополнительные знания (автозагрузка)
+└── agents/
+    └── va-*.md           # Агенты вызываются через Task tool
+```
+
+### Если нужна slash-команда → создай `commands/name.md`!
+
+---
+
+## Структура плагина
 
 ```
 plugins/
 └── my-plugin/
     ├── .claude-plugin/
     │   └── plugin.json      # Минимальный манифест
-    ├── skills/              # ⭐ SKILLS для slash-команд + агентов!
-    │   └── my-skill/
-    │       ├── SKILL.md     # Skill definition
-    │       └── references/  # Optional: detailed docs
-    ├── agents/              # Кастомные агенты
-    │   └── my-agent.md
-    ├── commands/            # Альтернатива skills (без агентов)
+    ├── commands/            # ⭐ SLASH-КОМАНДЫ (меню /)
     │   └── my-command.md
+    ├── skills/              # Knowledge bases (автозагрузка)
+    │   └── my-skill/
+    │       ├── SKILL.md
+    │       └── references/
+    ├── agents/              # Кастомные агенты (Task tool)
+    │   └── my-agent.md
     └── README.md
 ```
 
-### Skills vs Commands
+---
 
-| Компонент | Формат | Slash-команда | Агент |
-|-----------|--------|---------------|-------|
-| `skills/` | `skills/name/SKILL.md` | ✅ Да | ✅ Поддерживает `agent:` |
-| `commands/` | `commands/name.md` | ✅ Да | ❌ Нет |
+## Command Format (commands/name.md)
 
-**Если нужен кастомный агент — используй `skills/`!**
+```yaml
+---
+description: What the command does (shown in / menu)
+argument-hint: "<required> [optional] [--flag value]"
+allowed-tools: ["Read", "Write", "Bash", "Task"]
+---
+
+# Command Title
+
+Instructions for Claude...
+```
+
+### Поля frontmatter (commands)
+
+| Поле | Обязательно | Описание |
+|------|-------------|----------|
+| `description` | ✅ | Показывается в меню `/` |
+| `argument-hint` | ❌ | Подсказка по аргументам |
+| `allowed-tools` | ❌ | Разрешённые инструменты |
 
 ---
 
-## plugin.json Schema (МИНИМАЛЬНЫЙ!)
+## SKILL.md Format (skills/name/SKILL.md)
+
+```yaml
+---
+name: my-skill
+description: >
+  This skill should be used when the user asks to "do X", "perform Y"...
+  Include specific trigger phrases.
+---
+
+# Skill Title
+
+Knowledge and instructions...
+```
+
+### Поля frontmatter (skills)
+
+| Поле | Обязательно | Описание |
+|------|-------------|----------|
+| `name` | ✅ | Идентификатор skill |
+| `description` | ✅ | Триггеры для автозагрузки |
+| `version` | ❌ | Опциональная версия |
+
+**⚠️ Skills НЕ поддерживают:** `context`, `agent`, `allowed-tools`
+
+---
+
+## Agent File Format (agents/name.md)
+
+```yaml
+---
+name: my-agent
+description: |
+  Use this agent when [condition].
+
+  <example>
+  Context: [situation]
+  user: "request"
+  assistant: "I'll use my-agent..."
+  </example>
+model: opus              # opus, sonnet, haiku
+allowed-tools: Read, Grep, Glob, Bash
+---
+
+# Agent System Prompt
+
+You are a specialized agent for...
+```
+
+Агенты вызываются через **Task tool** на основе description.
+
+---
+
+## plugin.json Schema
 
 ```json
 {
@@ -64,54 +158,9 @@ plugins/
 ```
 
 **НЕ добавляй:**
-- ❌ `"skills": "./skills/"` — auto-discovery работает без этого
-- ❌ `"agents": "./agents/"` — не нужно
-
----
-
-## SKILL.md Format (skills/name/SKILL.md)
-
-```yaml
----
-name: my-skill
-description: >
-  This skill should be used when the user asks to "do X", "perform Y"...
-  Include specific trigger phrases that match user queries.
----
-
-# Skill Title
-
-Instructions for the skill...
-```
-
-### Поля frontmatter
-
-| Поле | Обязательно | Описание |
-|------|-------------|----------|
-| `name` | ✅ | Идентификатор skill |
-| `description` | ✅ | Third-person: "This skill should be used when..." |
-| `version` | ❌ | Опциональная версия |
-
-**⚠️ ВАЖНО:** Skills НЕ поддерживают поля `context`, `agent`, `allowed-tools`!
-Agents вызываются через Task tool в теле skill или через их description.
-
----
-
-## Agent File Format (agents/name.md)
-
-```yaml
----
-name: my-agent
-description: |
-  Agent description for Task tool.
-model: opus              # opus, sonnet, haiku
-allowed-tools: Read, Grep, Glob, Bash
----
-
-# Agent System Prompt
-
-You are a specialized agent for...
-```
+- ❌ `"skills": "./skills/"` — auto-discovery
+- ❌ `"agents": "./agents/"` — auto-discovery
+- ❌ `"commands": "./commands/"` — auto-discovery
 
 ---
 
@@ -126,9 +175,7 @@ You are a specialized agent for...
       "scope": "user",
       "installPath": "/Users/it/.claude/plugins/cache/jaine-custom/my-plugin/1.0.0",
       "version": "1.0.0",
-      "installedAt": "2026-01-25T12:00:00.000Z",
-      "lastUpdated": "2026-01-25T12:00:00.000Z",
-      "gitCommitSha": "abc123def456...",  // ⭐ ОБЯЗАТЕЛЬНО!
+      "gitCommitSha": "abc123def456...",
       "isLocal": true
     }
   ]
@@ -150,10 +197,10 @@ git rev-parse HEAD
 
 ## Development Workflow
 
-### 1. Create Skill with Agent
+### 1. Create Command + Agent
 
 ```bash
-mkdir -p plugins/my-plugin/{.claude-plugin,skills/my-skill,agents}
+mkdir -p plugins/my-plugin/{.claude-plugin,commands,agents}
 
 # plugin.json
 cat > plugins/my-plugin/.claude-plugin/plugin.json << 'EOF'
@@ -165,30 +212,29 @@ cat > plugins/my-plugin/.claude-plugin/plugin.json << 'EOF'
 }
 EOF
 
-# SKILL.md
-cat > plugins/my-plugin/skills/my-skill/SKILL.md << 'EOF'
+# Command (appears in / menu)
+cat > plugins/my-plugin/commands/my-command.md << 'EOF'
 ---
-name: my-skill
-description: >
-  Use when user asks to do X.
-context: fork
-agent: my-agent
+description: Do something cool
+argument-hint: "<target> [--depth level]"
+allowed-tools: ["Read", "Write", "Task"]
 ---
 
-# My Skill
+# My Command
 
 Instructions...
+Call changelog-analyzer agent via Task tool for analysis.
 EOF
 
-# Agent
+# Agent (called via Task tool)
 cat > plugins/my-plugin/agents/my-agent.md << 'EOF'
 ---
 name: my-agent
-description: Agent for X
+description: Use for deep analysis
 model: opus
 ---
 
-You are an expert in X...
+You are an expert...
 EOF
 ```
 
@@ -207,8 +253,6 @@ EOF
 
 ```bash
 cp -r plugins/my-plugin ~/.claude/plugins/cache/jaine-custom/my-plugin/1.0.0/
-
-# Get git SHA
 GIT_SHA=$(git rev-parse HEAD)
 ```
 
@@ -229,56 +273,47 @@ GIT_SHA=$(git rev-parse HEAD)
 ### 5. Restart & Test
 
 ```bash
-/my-plugin:my-skill
+/my-plugin:my-command
 ```
 
 ---
 
 ## Troubleshooting
 
-### Skill не появляется в меню `/`
+### Команда не появляется в меню `/`
 
-1. **gitCommitSha в installed_plugins.json?**
-   ```bash
-   grep -A8 "my-plugin@jaine-custom" ~/.claude/plugins/installed_plugins.json
-   ```
-
-2. **SKILL.md имеет правильный frontmatter?**
-   - `name:` — обязательно
-   - `description:` — обязательно
-
+1. **Есть `commands/name.md`?** — Skills НЕ появляются в меню!
+2. **gitCommitSha в installed_plugins.json?**
 3. **installPath и version совпадают?**
-
 4. **Кэш синхронизирован?**
-
 5. **Claude Code перезапущен?**
 
-### Агент не запускается
+### Агент не вызывается
 
-1. **`context: fork` в SKILL.md?** — обязательно для агента
-2. **`agent: agent-name` совпадает с `name:` в agents/file.md?**
-3. **Агент существует в `agents/` директории?**
+1. **description содержит `<example>` блоки?**
+2. **Агент существует в `agents/`?**
+3. **Command вызывает Task tool?**
 
 ---
 
 ## Quick Reference
 
-### Skill + Agent Pattern (рекомендуется)
+### Command + Agent (рекомендуется)
 
 ```
-skills/my-skill/SKILL.md     → context: fork, agent: my-agent
-agents/my-agent.md           → name: my-agent, model: opus
+commands/my-command.md   → description, argument-hint, allowed-tools
+agents/my-agent.md       → name, description, model: opus
 ```
 
-Результат: `/my-plugin:my-skill` запускает субагента с моделью Opus.
+Результат: `/my-command` появляется в меню, агент вызывается через Task.
 
-### Command Pattern (простой, без агента)
+### Skill (для background knowledge)
 
 ```
-commands/my-command.md       → description, allowed-tools
+skills/my-skill/SKILL.md → name, description (triggers)
 ```
 
-Результат: `/my-plugin:my-command` выполняется в основном контексте.
+Результат: Автоматически загружается при совпадении триггеров.
 
 ---
 
@@ -286,9 +321,9 @@ commands/my-command.md       → description, allowed-tools
 
 - **Plugin Dev Guide:** `/0/ANTHROPICS_DEV/docs/PLUGIN_DEV_GUIDE.md`
 - **Official Plugins:** `/0/ANTHROPICS_DEV/claude-plugins-official/`
-- **git-workflow (эталон):** `plugins/git-workflow/`
+- **vendor-analyzer (эталон):** `plugins/vendor-analyzer/`
 
 ---
 
-*Version: 3.0.0 | Updated: 2026-01-25*
-*MAJOR: Исправлено — skills поддерживают и slash-команды, и агенты!*
+*Version: 4.0.0 | Updated: 2026-01-25*
+*MAJOR: Исправлено — slash-команды в commands/, skills для auto-load knowledge*

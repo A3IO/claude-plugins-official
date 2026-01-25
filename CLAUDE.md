@@ -18,31 +18,75 @@
 
 ---
 
-## ⚠️ КРИТИЧНО: Skills vs Commands
+## ⚠️ КРИТИЧНО: Skills vs Commands vs Agents
 
 ### Ключевое различие
 
-| Компонент | Назначение | Появляется в `/` меню? |
-|-----------|------------|------------------------|
-| `commands/` | **Slash-команды** — активные действия | ✅ ДА |
-| `skills/` | **Knowledge bases** — пассивное знание | ❌ НЕТ |
+| Компонент | Назначение | Меню `/`? | Как вызывается? |
+|-----------|------------|-----------|-----------------|
+| `commands/` | **Slash-команды** | ✅ ДА | `/plugin:command` |
+| `skills/` | **Knowledge bases** | ❌ НЕТ | Автоматически по триггерам |
+| `agents/` | **Субпроцессы** | ❌ НЕТ | Через **Task tool** |
 
-**Skills НЕ появляются в меню `/`!** Skills загружаются автоматически когда триггеры в description совпадают с запросом пользователя.
-
-### Правильный паттерн (vendor-analyzer)
+### Полный workflow: Command → Agent
 
 ```
-plugins/vendor-analyzer/
-├── commands/
-│   └── analyze.md        # ⭐ ЭТО появляется как /analyze
-├── skills/
-│   └── analyze/
-│       └── SKILL.md      # Дополнительные знания (автозагрузка)
-└── agents/
-    └── va-*.md           # Агенты вызываются через Task tool
+1. User: /git-workflow:changelog-before-merge --depth thorough
+   ↓
+2. Command загружается, Claude читает инструкции
+   ↓
+3. Command инструктирует: "Use Task tool to launch agent"
+   ↓
+4. Claude вызывает Task tool с subagent_type="git-workflow:changelog-analyzer"
+   ↓
+5. Agent запускается (model: opus, isolated context)
+   ↓
+6. Agent выполняет работу, возвращает результат
 ```
 
-### Если нужна slash-команда → создай `commands/name.md`!
+---
+
+## ⚠️ КРИТИЧНО: Как Command запускает Agent
+
+### НЕТ автоматического механизма!
+
+| Что НЕ работает | Почему |
+|-----------------|--------|
+| `agent: my-agent` в frontmatter command | Нет такого поля |
+| `context: fork` в command | Только для skills (и то не работает) |
+| Автовызов по имени | Нет такой фичи |
+
+### Правильный способ: Явные инструкции в command
+
+**commands/my-command.md:**
+```markdown
+---
+description: Do something with agent
+allowed-tools: ["Task", "Bash"]
+---
+
+# My Command
+
+**IMMEDIATELY use the Task tool to launch the my-plugin:my-agent agent.**
+
+Do NOT attempt to do this yourself. The agent has model: opus.
+
+## Step 1: Gather info
+...
+
+## Step 2: Launch Agent NOW
+
+Call Task tool with subagent_type="my-plugin:my-agent"
+```
+
+### ⚠️ Имя агента в Task tool
+
+**Формат:** `plugin-name:agent-name`
+
+```
+❌ changelog-analyzer           # НЕ НАЙДЁТ
+✅ git-workflow:changelog-analyzer  # ПРАВИЛЬНО
+```
 
 ---
 
@@ -54,13 +98,13 @@ plugins/
     ├── .claude-plugin/
     │   └── plugin.json      # Минимальный манифест
     ├── commands/            # ⭐ SLASH-КОМАНДЫ (меню /)
-    │   └── my-command.md
+    │   └── my-command.md    # Инструкции + вызов агента
     ├── skills/              # Knowledge bases (автозагрузка)
     │   └── my-skill/
     │       ├── SKILL.md
     │       └── references/
-    ├── agents/              # Кастомные агенты (Task tool)
-    │   └── my-agent.md
+    ├── agents/              # Кастомные агенты
+    │   └── my-agent.md      # model: opus, system prompt
     └── README.md
 ```
 
@@ -72,12 +116,26 @@ plugins/
 ---
 description: What the command does (shown in / menu)
 argument-hint: "<required> [optional] [--flag value]"
-allowed-tools: ["Read", "Write", "Bash", "Task"]
+allowed-tools: ["Task", "Bash", "Read"]
 ---
 
 # Command Title
 
-Instructions for Claude...
+**IMMEDIATELY use the Task tool to launch the plugin-name:agent-name agent.**
+
+Do NOT attempt this yourself.
+
+## Step 1: Parse Arguments
+...
+
+## Step 2: Launch Agent
+
+Call Task tool with subagent_type="plugin-name:agent-name"
+
+Prompt for agent:
+- What to analyze
+- Expected output format
+- Critical requirements
 ```
 
 ### Поля frontmatter (commands)
@@ -86,7 +144,44 @@ Instructions for Claude...
 |------|-------------|----------|
 | `description` | ✅ | Показывается в меню `/` |
 | `argument-hint` | ❌ | Подсказка по аргументам |
-| `allowed-tools` | ❌ | Разрешённые инструменты |
+| `allowed-tools` | ❌ | **Включи Task если нужен agent!** |
+
+---
+
+## Agent File Format (agents/name.md)
+
+```yaml
+---
+name: my-agent
+description: |
+  Use this agent when [condition].
+  Performs [what it does] with [capabilities].
+model: opus              # opus, sonnet, haiku
+allowed-tools: Read, Grep, Glob, Bash, Write, mcp__sequentialthinking__sequentialthinking
+---
+
+# Agent System Prompt
+
+You are a specialized agent for...
+
+## Your Capabilities
+- Deep analysis with sequential thinking
+- Code verification
+- ...
+
+## Output Requirements
+- Format: ...
+- Location: ...
+```
+
+### Поля frontmatter (agents)
+
+| Поле | Обязательно | Описание |
+|------|-------------|----------|
+| `name` | ✅ | Идентификатор (используется как `plugin:name`) |
+| `description` | ✅ | Когда использовать агента |
+| `model` | ❌ | `opus`, `sonnet`, `haiku` (default: sonnet) |
+| `allowed-tools` | ❌ | Доступные инструменты |
 
 ---
 
@@ -105,41 +200,9 @@ description: >
 Knowledge and instructions...
 ```
 
-### Поля frontmatter (skills)
-
-| Поле | Обязательно | Описание |
-|------|-------------|----------|
-| `name` | ✅ | Идентификатор skill |
-| `description` | ✅ | Триггеры для автозагрузки |
-| `version` | ❌ | Опциональная версия |
-
 **⚠️ Skills НЕ поддерживают:** `context`, `agent`, `allowed-tools`
 
----
-
-## Agent File Format (agents/name.md)
-
-```yaml
----
-name: my-agent
-description: |
-  Use this agent when [condition].
-
-  <example>
-  Context: [situation]
-  user: "request"
-  assistant: "I'll use my-agent..."
-  </example>
-model: opus              # opus, sonnet, haiku
-allowed-tools: Read, Grep, Glob, Bash
----
-
-# Agent System Prompt
-
-You are a specialized agent for...
-```
-
-Агенты вызываются через **Task tool** на основе description.
+Skills — это **пассивное знание**, которое загружается автоматически.
 
 ---
 
@@ -157,10 +220,7 @@ You are a specialized agent for...
 }
 ```
 
-**НЕ добавляй:**
-- ❌ `"skills": "./skills/"` — auto-discovery
-- ❌ `"agents": "./agents/"` — auto-discovery
-- ❌ `"commands": "./commands/"` — auto-discovery
+**Auto-discovery:** Не нужно указывать пути к skills/agents/commands.
 
 ---
 
@@ -187,58 +247,61 @@ You are a specialized agent for...
 | jaine-plugins | ❌ Не нужен | ✅ |
 | jaine-custom | ✅ **ОБЯЗАТЕЛЕН** | ✅ |
 
-**Получить SHA:**
-```bash
-cd /0/ANTHROPICS_DEV/jaine-plugins
-git rev-parse HEAD
-```
-
 ---
 
 ## Development Workflow
 
-### 1. Create Command + Agent
+### 1. Создать структуру
 
 ```bash
 mkdir -p plugins/my-plugin/{.claude-plugin,commands,agents}
+```
 
-# plugin.json
-cat > plugins/my-plugin/.claude-plugin/plugin.json << 'EOF'
+### 2. plugin.json
+
+```json
 {
   "name": "my-plugin",
   "version": "1.0.0",
   "description": "My plugin",
   "author": { "name": "JAINE", "email": "jaine@local" }
 }
-EOF
+```
 
-# Command (appears in / menu)
-cat > plugins/my-plugin/commands/my-command.md << 'EOF'
+### 3. Agent (agents/my-agent.md)
+
+```yaml
 ---
-description: Do something cool
+name: my-agent
+description: Deep analysis agent
+model: opus
+allowed-tools: Read, Grep, Glob, Bash, Write
+---
+
+You are an expert analyst...
+```
+
+### 4. Command (commands/my-command.md)
+
+```yaml
+---
+description: Run analysis with my-agent
 argument-hint: "<target> [--depth level]"
-allowed-tools: ["Read", "Write", "Task"]
+allowed-tools: ["Task", "Bash"]
 ---
 
 # My Command
 
-Instructions...
-Call changelog-analyzer agent via Task tool for analysis.
-EOF
+**IMMEDIATELY use Task tool to launch my-plugin:my-agent.**
 
-# Agent (called via Task tool)
-cat > plugins/my-plugin/agents/my-agent.md << 'EOF'
----
-name: my-agent
-description: Use for deep analysis
-model: opus
----
+## Step 1: Parse args
+...
 
-You are an expert...
-EOF
+## Step 2: Launch agent
+Call Task with subagent_type="my-plugin:my-agent"
 ```
 
-### 2. Register in marketplace.json
+### 5. Register in marketplace.json
 
 ```json
 {
@@ -249,31 +312,28 @@ EOF
 }
 ```
 
-### 3. Install to Cache
+### 6. Sync to cache
 
 ```bash
 cp -r plugins/my-plugin ~/.claude/plugins/cache/jaine-custom/my-plugin/1.0.0/
-GIT_SHA=$(git rev-parse HEAD)
 ```
 
-### 4. Update installed_plugins.json
+### 7. Update installed_plugins.json
 
 ```json
-"my-plugin@jaine-custom": [
-  {
-    "scope": "user",
-    "installPath": ".../my-plugin/1.0.0",
-    "version": "1.0.0",
-    "gitCommitSha": "YOUR_SHA",
-    "isLocal": true
-  }
-]
+"my-plugin@jaine-custom": [{
+  "scope": "user",
+  "installPath": "...cache/jaine-custom/my-plugin/1.0.0",
+  "version": "1.0.0",
+  "gitCommitSha": "$(git rev-parse HEAD)",
+  "isLocal": true
+}]
 ```
 
-### 5. Restart & Test
+### 8. Restart Claude Code & Test
 
-```bash
-/my-plugin:my-command
+```
+/my-plugin:my-command --depth thorough
 ```
 
 ---
@@ -282,48 +342,74 @@ GIT_SHA=$(git rev-parse HEAD)
 
 ### Команда не появляется в меню `/`
 
-1. **Есть `commands/name.md`?** — Skills НЕ появляются в меню!
+1. **Есть `commands/name.md`?** — Skills НЕ появляются!
 2. **gitCommitSha в installed_plugins.json?**
-3. **installPath и version совпадают?**
-4. **Кэш синхронизирован?**
-5. **Claude Code перезапущен?**
+3. **Кэш синхронизирован?**
+4. **Claude Code перезапущен?**
 
-### Агент не вызывается
+### Агент не запускается
 
-1. **description содержит `<example>` блоки?**
-2. **Агент существует в `agents/`?**
-3. **Command вызывает Task tool?**
+1. **Command содержит явную инструкцию вызвать Task tool?**
+2. **Правильное имя: `plugin-name:agent-name`?**
+3. **Task в allowed-tools command'а?**
+4. **Агент существует в `agents/`?**
+
+### Агент не найден
+
+```
+Error: Agent type 'my-agent' not found
+```
+
+**Решение:** Используй полное имя `my-plugin:my-agent`
+
+---
+
+## Примеры из практики
+
+### git-workflow (changelog generation)
+
+```
+/git-workflow:changelog-before-merge --depth thorough
+```
+
+**Как работает:**
+1. Command определяет ветки
+2. Command вызывает `git-workflow:changelog-analyzer`
+3. Agent (opus) генерирует changelog с sequential thinking
+4. Agent верифицирует факты против кода
+
+### vendor-analyzer (5-agent pipeline)
+
+```
+/vendor-analyzer:analyze vendors/serena --depth exhaustive
+```
+
+**Как работает:**
+1. Command запускает pipeline
+2. Последовательно вызывает 5 агентов:
+   - va-inventory → va-structure → va-dependencies → va-algorithms → va-report
+3. Каждый агент работает изолированно
 
 ---
 
 ## Quick Reference
 
-### Command + Agent (рекомендуется)
-
-```
-commands/my-command.md   → description, argument-hint, allowed-tools
-agents/my-agent.md       → name, description, model: opus
-```
-
-Результат: `/my-command` появляется в меню, агент вызывается через Task.
-
-### Skill (для background knowledge)
-
-```
-skills/my-skill/SKILL.md → name, description (triggers)
-```
-
-Результат: Автоматически загружается при совпадении триггеров.
+| Что нужно | Решение |
+|-----------|---------|
+| Slash-команда в меню | `commands/name.md` |
+| Агент с opus | `agents/name.md` + `model: opus` |
+| Command → Agent | Инструкция + `Task tool` + `plugin:agent` |
+| Auto-load knowledge | `skills/name/SKILL.md` |
 
 ---
 
 ## Related
 
-- **Plugin Dev Guide:** `/0/ANTHROPICS_DEV/docs/PLUGIN_DEV_GUIDE.md`
 - **Official Plugins:** `/0/ANTHROPICS_DEV/claude-plugins-official/`
-- **vendor-analyzer (эталон):** `plugins/vendor-analyzer/`
+- **vendor-analyzer:** `plugins/vendor-analyzer/` (5-agent pipeline)
+- **git-workflow:** `plugins/git-workflow/` (command + agent)
 
 ---
 
-*Version: 4.0.0 | Updated: 2026-01-25*
-*MAJOR: Исправлено — slash-команды в commands/, skills для auto-load knowledge*
+*Version: 5.0.0 | Updated: 2026-01-25*
+*MAJOR: Добавлено — Command → Agent workflow, правильное имя агента plugin:name*

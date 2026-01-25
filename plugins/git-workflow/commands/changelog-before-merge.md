@@ -1,10 +1,7 @@
 ---
-name: changelog-before-merge
-description: >
-  Use this skill when the user asks to "generate changelog",
-  "analyze changes before merge", "document PR changes", "what changed",
-  "create branch changelog", or needs comprehensive git diff analysis
-  with commit history, bug fixes, architecture diagrams, and related issues.
+description: Analyze git diff between branches and generate comprehensive BRANCH_CHANGELOG.md. Use before creating pull requests to document all changes with commit history, file analysis, bug fixes, architecture diagrams, and related issues.
+argument-hint: "[target-branch] [--depth thorough|standard] [--lang ru|en]"
+allowed-tools: ["Task", "Bash", "Read", "Write", "Glob", "Grep", "mcp__sequentialthinking__sequentialthinking"]
 ---
 
 # Changelog Before Merge
@@ -59,13 +56,6 @@ fi
 TARGET=${1:-$DEFAULT_TARGET}
 ```
 
-**Auto-detection examples:**
-| Current Branch | Default Target |
-|----------------|----------------|
-| `jaine-speech/fix/voice-key` | `jaine-speech/main` |
-| `dotfiles/feat/zsh-update` | `dotfiles/main` |
-| `feat/simple-feature` | `main` |
-
 ### Step 2: Gather Data
 
 ```bash
@@ -91,11 +81,8 @@ Create `docs/BRANCH_CHANGELOG_{branch-name}.md` with required sections.
 
 ### Step 4.5: Code Verification (MANDATORY)
 
-**After generating draft, MUST verify all claims against code.**
+**After generating draft, MUST verify all claims against code:**
 
-See [references/code-verification.md](references/code-verification.md) for detailed verification process.
-
-Quick summary:
 - Verify method names: `grep "def method_name" src/`
 - Verify endpoints: `grep "@app.post.*endpoint" src/`
 - Verify new files: `test -f path`
@@ -109,7 +96,7 @@ Quick summary:
 1. **Executive Summary** - Overview + emoji bullet points
 2. **Statistics Table** - Files, lines, commits, issues
 3. **Commit History + Distribution** - Table + type percentages
-4. **Architecture Changes** - Mermaid diagrams (see [references/mermaid-diagrams.md](references/mermaid-diagrams.md))
+4. **Architecture Changes** - Mermaid diagrams
 5. **Bug Fixes** - Root Cause Analysis (Symptom -> Cause -> Solution)
 6. **New Features** - Description with usage examples
 7. **Breaking Changes** - Migration steps (if any)
@@ -139,8 +126,6 @@ Quick summary:
 
 ## Quality Gates
 
-See [references/quality-checklist.md](references/quality-checklist.md) for full checklist.
-
 **Critical checks:**
 - [ ] Executive Summary includes emoji bullet points
 - [ ] All bugs have Root Cause analysis
@@ -161,15 +146,6 @@ docs/{YYYY-MM-DD}_BRANCH_CHANGELOG_{branch}_{PR}.md
 1. Query API for PRs with current branch as head
 2. If found -> include `_PR{number}`
 3. If not -> omit suffix
-
----
-
-## Examples
-
-See [../../examples/](../../examples/) for templates and real-world examples:
-- `TEMPLATE.md` - Clean template with placeholders
-- `EXAMPLE_ANNOTATED.md` - Generic annotated example
-- `REAL_WORLD_jaine-speech.md` - Real PR #44 example
 
 ---
 

@@ -20,8 +20,8 @@
     },
     {
       "name": "git-workflow",
-      "description": "Git workflow automation with skills: changelog generation (ISO 8601, code verification, Mermaid diagrams)",
-      "version": "1.4.0",
+      "description": "Git workflow automation with skills: changelog generation (ISO 8601, clickable links, code verification, Mermaid diagrams)",
+      "version": "1.4.1",
       "author": {
         "name": "JAINE",
         "email": "jaine@local"

@@ -5,9 +5,5 @@
   "author": {
     "name": "JAINE",
     "email": "jaine@local"
-  },
-  "keywords": ["git", "changelog", "skill", "merge", "pr", "workflow", "forgejo", "verification"],
-  "repository": "https://github.com/jaine/plugins",
-  "skills": "./skills/",
-  "agents": "./agents/"
+  }
 }

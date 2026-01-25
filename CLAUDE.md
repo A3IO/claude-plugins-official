@@ -14,39 +14,38 @@
 | Plugin | Version | Description |
 |--------|---------|-------------|
 | `vendor-analyzer` | 0.1.0 | 5-agent pipeline для анализа codebase |
-| `git-workflow` | 1.4.1 | Changelog generation, PR workflow |
+| `git-workflow` | 1.4.1 | Changelog generation с агентом changelog-analyzer |
 
 ---
 
-## ⚠️ КРИТИЧНО: Правильная структура плагина
+## Структура плагина
 
-**После долгого debugging выяснили:** Claude Code использует **`commands/`**, а НЕ `skills/`!
-
-### Рабочая структура (vendor-analyzer как эталон)
+### Правильная структура
 
 ```
 plugins/
 └── my-plugin/
     ├── .claude-plugin/
     │   └── plugin.json      # Минимальный манифест
-    ├── commands/            # ⭐ КОМАНДЫ ЗДЕСЬ!
-    │   └── my-command.md    # Файл команды
-    ├── agents/              # Опционально
-    │   └── my-agent.md
-    ├── skills/              # НЕ используется для slash-команд
+    ├── skills/              # ⭐ SKILLS для slash-команд + агентов!
     │   └── my-skill/
-    │       └── SKILL.md     # Для AI auto-invocation
+    │       ├── SKILL.md     # Skill definition
+    │       └── references/  # Optional: detailed docs
+    ├── agents/              # Кастомные агенты
+    │   └── my-agent.md
+    ├── commands/            # Альтернатива skills (без агентов)
+    │   └── my-command.md
     └── README.md
 ```
 
-### Разница между commands/ и skills/
+### Skills vs Commands
 
-| Компонент | Формат | Для чего |
-|-----------|--------|----------|
-| `commands/` | `commands/name.md` | **Slash-команды** (`/name`) |
-| `skills/` | `skills/name/SKILL.md` | AI auto-invocation (не slash!) |
+| Компонент | Формат | Slash-команда | Агент |
+|-----------|--------|---------------|-------|
+| `skills/` | `skills/name/SKILL.md` | ✅ Да | ✅ Поддерживает `agent:` |
+| `commands/` | `commands/name.md` | ✅ Да | ❌ Нет |
 
-**Если нужна `/команда` — используй `commands/`!**
+**Если нужен кастомный агент — используй `skills/`!**
 
 ---
 
@@ -65,40 +64,61 @@ plugins/
 ```
 
 **НЕ добавляй:**
-- ❌ `"skills": "./skills/"` — вызывает проблемы
+- ❌ `"skills": "./skills/"` — auto-discovery работает без этого
 - ❌ `"agents": "./agents/"` — не нужно
-- ❌ `"keywords"`, `"repository"` — опционально
 
 ---
 
-## Command File Format (commands/*.md)
+## SKILL.md Format (skills/name/SKILL.md)
 
 ```yaml
 ---
-description: Краткое описание команды для меню /help
-argument-hint: "<required> [--optional]"
-allowed-tools: ["Task", "Bash", "Read", "Write", "Glob", "Grep"]
+name: my-skill
+description: >
+  Use this skill when the user asks to "do X", "perform Y"...
+context: fork              # ⭐ ОБЯЗАТЕЛЬНО для агента!
+agent: my-custom-agent     # ⭐ Ссылка на агента из agents/
+allowed-tools: Read, Grep, Glob, Bash, Write
 ---
 
-# Command Title
+# Skill Title
 
-Detailed instructions for the command...
+Instructions for the skill...
 ```
 
-**Пример из vendor-analyzer:**
+### Поля frontmatter
+
+| Поле | Обязательно | Описание |
+|------|-------------|----------|
+| `name` | ✅ | Идентификатор skill |
+| `description` | ✅ | Для AI — когда использовать |
+| `context` | Для агента | `fork` — изолированный контекст |
+| `agent` | Опционально | Имя агента из `agents/` |
+| `allowed-tools` | Опционально | Доступные инструменты |
+
+---
+
+## Agent File Format (agents/name.md)
+
 ```yaml
 ---
-description: Run exhaustive vendor codebase analysis pipeline with 5 sequential agents
-argument-hint: <path> [--depth surface|standard|deep|exhaustive]
-allowed-tools: ["Task", "TodoWrite", "Read", "Write", "Glob", "Grep", "LS", "Bash"]
+name: my-agent
+description: |
+  Agent description for Task tool.
+model: opus              # opus, sonnet, haiku
+allowed-tools: Read, Grep, Glob, Bash
 ---
+
+# Agent System Prompt
+
+You are a specialized agent for...
 ```
 
 ---
 
 ## ⚠️ КРИТИЧНО: installed_plugins.json
 
-### Обязательные поля для jaine-custom
+### gitCommitSha ОБЯЗАТЕЛЕН для jaine-custom!
 
 ```json
 {
@@ -116,241 +136,150 @@ allowed-tools: ["Task", "TodoWrite", "Read", "Write", "Glob", "Grep", "LS", "Bas
 }
 ```
 
-### gitCommitSha — ОБЯЗАТЕЛЬНО для jaine-custom!
-
 | Marketplace | gitCommitSha | Работает? |
 |-------------|--------------|-----------|
 | jaine-plugins | ❌ Не нужен | ✅ |
 | jaine-custom | ✅ **ОБЯЗАТЕЛЕН** | ✅ |
 
-**Без gitCommitSha плагин из jaine-custom НЕ загрузится!**
-
-Получить SHA:
+**Получить SHA:**
 ```bash
 cd /0/ANTHROPICS_DEV/jaine-plugins
 git rev-parse HEAD
-# → 9f8347e1b511272d3aabb2dfb99ee90cd78c202a
 ```
 
 ---
 
 ## Development Workflow
 
-### 1. Create Plugin Structure
+### 1. Create Skill with Agent
 
 ```bash
-mkdir -p plugins/my-plugin/{.claude-plugin,commands,agents}
+mkdir -p plugins/my-plugin/{.claude-plugin,skills/my-skill,agents}
 
-# Minimal plugin.json
+# plugin.json
 cat > plugins/my-plugin/.claude-plugin/plugin.json << 'EOF'
 {
   "name": "my-plugin",
   "version": "1.0.0",
-  "description": "My plugin description",
-  "author": {
-    "name": "JAINE",
-    "email": "jaine@local"
-  }
+  "description": "My plugin",
+  "author": { "name": "JAINE", "email": "jaine@local" }
 }
 EOF
-```
 
-### 2. Create Command
-
-```bash
-cat > plugins/my-plugin/commands/my-command.md << 'EOF'
+# SKILL.md
+cat > plugins/my-plugin/skills/my-skill/SKILL.md << 'EOF'
 ---
-description: My command description
-argument-hint: "[--option]"
-allowed-tools: ["Task", "Bash", "Read", "Write", "Glob", "Grep"]
+name: my-skill
+description: >
+  Use when user asks to do X.
+context: fork
+agent: my-agent
 ---
 
-# My Command
+# My Skill
 
-Instructions for the command...
+Instructions...
+EOF
+
+# Agent
+cat > plugins/my-plugin/agents/my-agent.md << 'EOF'
+---
+name: my-agent
+description: Agent for X
+model: opus
+---
+
+You are an expert in X...
 EOF
 ```
 
-### 3. Register in marketplace.json
+### 2. Register in marketplace.json
 
-```bash
-# Добавить в .claude-plugin/marketplace.json
+```json
 {
   "name": "my-plugin",
-  "description": "My plugin",
   "version": "1.0.0",
-  "author": { "name": "JAINE", "email": "jaine@local" },
   "source": "./plugins/my-plugin",
   "category": "development"
 }
 ```
 
-### 4. Install to Cache
+### 3. Install to Cache
 
 ```bash
-# Скопировать в кэш
 cp -r plugins/my-plugin ~/.claude/plugins/cache/jaine-custom/my-plugin/1.0.0/
 
-# Получить git SHA
+# Get git SHA
 GIT_SHA=$(git rev-parse HEAD)
-echo "gitCommitSha: $GIT_SHA"
 ```
 
-### 5. Update installed_plugins.json
+### 4. Update installed_plugins.json
 
 ```json
 "my-plugin@jaine-custom": [
   {
     "scope": "user",
-    "installPath": "/Users/it/.claude/plugins/cache/jaine-custom/my-plugin/1.0.0",
+    "installPath": ".../my-plugin/1.0.0",
     "version": "1.0.0",
-    "installedAt": "2026-01-25T12:00:00.000Z",
-    "lastUpdated": "2026-01-25T12:00:00.000Z",
-    "gitCommitSha": "YOUR_GIT_SHA_HERE",
+    "gitCommitSha": "YOUR_SHA",
     "isLocal": true
   }
 ]
 ```
 
-### 6. Restart Claude Code & Test
+### 5. Restart & Test
 
 ```bash
-# После рестарта:
-/my-plugin:my-command
-# или
-/my-command
+/my-plugin:my-skill
 ```
 
 ---
 
 ## Troubleshooting
 
-### Command не появляется в меню `/`
+### Skill не появляется в меню `/`
 
-**Чеклист:**
-
-1. **Файл в `commands/`, а не в `skills/`?**
-   ```bash
-   ls plugins/my-plugin/commands/
-   # Должен быть: my-command.md
-   ```
-
-2. **gitCommitSha указан в installed_plugins.json?**
+1. **gitCommitSha в installed_plugins.json?**
    ```bash
    grep -A8 "my-plugin@jaine-custom" ~/.claude/plugins/installed_plugins.json
-   # ДОЛЖЕН быть gitCommitSha!
    ```
+
+2. **SKILL.md имеет правильный frontmatter?**
+   - `name:` — обязательно
+   - `description:` — обязательно
 
 3. **installPath и version совпадают?**
-   ```bash
-   # installPath: .../my-plugin/1.0.0
-   # version: "1.0.0"
-   # Должны совпадать!
-   ```
 
-4. **Нет orphaned директорий?**
-   ```bash
-   ls ~/.claude/plugins/cache/jaine-custom/my-plugin/
-   # Должна быть только ОДНА директория с версией
-   ```
+4. **Кэш синхронизирован?**
 
 5. **Claude Code перезапущен?**
 
-### ⚠️ Skill исчезает после перезагрузки
+### Агент не запускается
 
-**Причина:** Несогласованность `installPath` и `version`.
-
-**Диагностика:**
-```bash
-ls ~/.claude/plugins/cache/jaine-custom/my-plugin/
-# Если видишь несколько версий (1.4.0/, 1.4.1/) — проблема!
-
-cat ~/.claude/plugins/cache/jaine-custom/my-plugin/*/.orphaned_at 2>/dev/null
-# Если есть .orphaned_at — проблема!
-```
-
-**Решение:**
-```bash
-# 1. Оставить только нужную версию
-rm -rf ~/.claude/plugins/cache/jaine-custom/my-plugin/OLD_VERSION/
-
-# 2. Исправить installed_plugins.json
-# installPath и version должны совпадать!
-
-# 3. Перезапустить Claude Code
-```
-
----
-
-## Registry (marketplace.json)
-
-```json
-{
-  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
-  "name": "jaine-custom",
-  "description": "JAINE custom plugins",
-  "owner": {
-    "name": "JAINE",
-    "email": "jaine@local"
-  },
-  "plugins": [
-    {
-      "name": "my-plugin",
-      "description": "Plugin description",
-      "version": "1.0.0",
-      "author": { "name": "JAINE", "email": "jaine@local" },
-      "source": "./plugins/my-plugin",
-      "category": "development"
-    }
-  ]
-}
-```
+1. **`context: fork` в SKILL.md?** — обязательно для агента
+2. **`agent: agent-name` совпадает с `name:` в agents/file.md?**
+3. **Агент существует в `agents/` директории?**
 
 ---
 
 ## Quick Reference
 
-### Добавить новую команду в существующий плагин
+### Skill + Agent Pattern (рекомендуется)
 
-```bash
-# 1. Создать команду
-cat > plugins/git-workflow/commands/new-command.md << 'EOF'
----
-description: New command description
-argument-hint: "[args]"
-allowed-tools: ["Bash", "Read", "Write"]
----
-
-# New Command
-
-Instructions...
-EOF
-
-# 2. Скопировать в кэш
-cp plugins/git-workflow/commands/new-command.md \
-   ~/.claude/plugins/cache/jaine-custom/git-workflow/1.4.1/commands/
-
-# 3. Перезапустить Claude Code
+```
+skills/my-skill/SKILL.md     → context: fork, agent: my-agent
+agents/my-agent.md           → name: my-agent, model: opus
 ```
 
-### Обновить версию плагина
+Результат: `/my-plugin:my-skill` запускает субагента с моделью Opus.
 
-```bash
-# 1. Обновить version в plugin.json
-# 2. Создать новую директорию в кэше
-mkdir ~/.claude/plugins/cache/jaine-custom/my-plugin/1.0.1/
-cp -r plugins/my-plugin/* ~/.claude/plugins/cache/jaine-custom/my-plugin/1.0.1/
+### Command Pattern (простой, без агента)
 
-# 3. Обновить installed_plugins.json:
-#    - installPath: .../1.0.1
-#    - version: "1.0.1"
-#    - gitCommitSha: NEW_SHA
-
-# 4. Удалить старую версию (опционально)
-rm -rf ~/.claude/plugins/cache/jaine-custom/my-plugin/1.0.0/
-
-# 5. Перезапустить Claude Code
 ```
+commands/my-command.md       → description, allowed-tools
+```
+
+Результат: `/my-plugin:my-command` выполняется в основном контексте.
 
 ---
 
@@ -358,9 +287,9 @@ rm -rf ~/.claude/plugins/cache/jaine-custom/my-plugin/1.0.0/
 
 - **Plugin Dev Guide:** `/0/ANTHROPICS_DEV/docs/PLUGIN_DEV_GUIDE.md`
 - **Official Plugins:** `/0/ANTHROPICS_DEV/claude-plugins-official/`
-- **vendor-analyzer (эталон):** `plugins/vendor-analyzer/`
+- **git-workflow (эталон):** `plugins/git-workflow/`
 
 ---
 
-*Version: 2.0.0 | Updated: 2026-01-25*
-*MAJOR: Полностью переписано после debugging — commands/ вместо skills/, gitCommitSha обязателен*
+*Version: 3.0.0 | Updated: 2026-01-25*
+*MAJOR: Исправлено — skills поддерживают и slash-команды, и агенты!*

@@ -1,3 +1,13 @@
+---
+name: analyze
+description: >
+  Use this skill when the user asks to "analyze a vendor codebase",
+  "understand third-party code", "review vendor architecture",
+  "document vendor dependencies", or "create codebase documentation".
+  Triggers on mentions of vendor analysis, codebase documentation,
+  or understanding unfamiliar/external codebases.
+---
+
 # Vendor Codebase Analysis
 
 Use this skill when analyzing third-party/vendor codebases to understand their architecture, dependencies, and algorithms. The vendor-analyzer provides exhaustive documentation in Obsidian-compatible format.

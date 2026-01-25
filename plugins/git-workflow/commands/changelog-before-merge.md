@@ -6,7 +6,7 @@ allowed-tools: ["Task", "Bash"]
 
 # Changelog Before Merge
 
-**IMMEDIATELY use the Task tool to launch the changelog-analyzer agent.**
+**IMMEDIATELY use the Task tool to launch the git-workflow:changelog-analyzer agent.**
 
 Do NOT attempt to generate the changelog yourself. The changelog-analyzer agent has:
 - Model: **opus** (required for deep analysis)
@@ -28,7 +28,7 @@ Otherwise auto-detect:
 
 ## Step 3: Launch Agent NOW
 
-**Call the Task tool with subagent_type="changelog-analyzer":**
+**Call the Task tool with subagent_type="git-workflow:changelog-analyzer":**
 
 Prompt for the agent:
 ```

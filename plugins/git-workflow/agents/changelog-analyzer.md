@@ -44,12 +44,45 @@ Use **ultrathink sequential reasoning** via `mcp__sequentialthinking__sequential
 git rev-parse --abbrev-ref HEAD
 git log TARGET..HEAD --oneline
 
-# Statistics
+# Statistics (summary)
 git diff TARGET..HEAD --stat
+
+# Per-file exact line counts (MANDATORY for Section 9!)
+git diff TARGET..HEAD --numstat
 
 # Full diff (for analysis)
 git diff TARGET..HEAD
 ```
+
+### Step 1.5: Issue/PR Distinction (MANDATORY)
+
+After extracting `#N` references from commit messages, **VERIFY each reference type via API**.
+
+On Forgejo (and GitHub), PRs share the same ID space as issues. `#48` could be a PR, not an issue!
+
+```bash
+# Forgejo: check if #N is issue or PR
+curl -s -H "Authorization: token $FORGEJO_API_TOKEN" \
+  "$FORGEJO_API_URL/repos/OWNER/REPO/issues/N" | jq '.pull_request != null'
+# true → it's a PR, false → it's an issue
+
+# GitHub: same check
+gh api repos/OWNER/REPO/issues/N --jq '.pull_request != null'
+```
+
+**Classification:**
+
+| `pull_request` | Type | Link Format | Where to list |
+|----------------|------|-------------|---------------|
+| `null` | Issue | `[#N](url/issues/N)` | "Связанные Issues" table |
+| `not null` | Pull Request | `[PR #N](url/pulls/N)` | NOT in "Связанные Issues" |
+
+**Rules:**
+1. **NEVER assume** `#N` from commit message is an issue — always check API
+2. If `#N` is a PR → use `PR #N` format with `/pulls/N` URL
+3. In "Связанные Issues" table → list ONLY confirmed issues, not PRs
+4. If branch has NO bound issues → write `нет (ветка без привязанного issue)`
+5. **Best-effort:** If no API token available → skip check, add warning: `⚠️ Issue/PR type not verified (no API token)`
 
 ### Step 2: Classify Changes
 
@@ -168,7 +201,7 @@ Generate markdown with these sections:
 | Строк добавлено | +X |
 | Строк удалено | -X |
 | Коммитов | X |
-| Связанные issues | #X, #Y |
+| Связанные issues | #X, #Y (только confirmed issues, НЕ PRs! См. Step 1.5) |
 
 ### 3. Commit History Table
 | Commit | Тип | Scope | Описание |
@@ -223,12 +256,19 @@ new_code()
 | #123 | ... | Resolved |
 
 ### 9. File-by-File Analysis
+
+**CRITICAL: Use `git diff --numstat` output for per-file line counts!**
+**NEVER estimate or approximate line counts from diff content.**
+
+Format for line counts: `+N/-M строк` (exact values from numstat).
+Binary files show as `-/-` in numstat.
+
 Group by directory/layer:
 ```markdown
 #### `src/module/` (Core Logic)
 | Файл | Изменение | Влияние |
 |------|-----------|---------|
-| file.py | Добавлен метод X | Новая функциональность |
+| file.py | +45/-12 строк: Добавлен метод X | Новая функциональность |
 ```
 
 ### 10. Migration Notes (if needed)
@@ -254,12 +294,14 @@ Parse your generated markdown and collect:
 
 ```python
 claims = {
-    "methods": [],      # method_name(), function_name()
-    "endpoints": [],    # /api/endpoint-name
-    "new_files": [],    # Files marked as NEW
-    "events": [],       # SSE events, WebSocket messages
-    "cli_options": [],  # --option-name
-    "classes": [],      # class ClassName
+    "methods": [],        # method_name(), function_name()
+    "endpoints": [],      # /api/endpoint-name
+    "new_files": [],      # Files marked as NEW
+    "events": [],         # SSE events, WebSocket messages
+    "cli_options": [],    # --option-name
+    "classes": [],        # class ClassName
+    "per_file_stats": [], # +N/-M строк per file (from Section 9)
+    "issue_pr_refs": [],  # #N references — is it issue or PR?
 }
 ```
 
@@ -294,6 +336,26 @@ echo "=== CLIENT ===" && grep "{name}" src/**/client.py
 **CLI Options:**
 ```bash
 grep -rn "\-\-{option}" src/**/cli/*.py
+```
+
+**Per-File Line Counts (from Section 9):**
+```bash
+# Must match git diff --numstat EXACTLY
+git diff TARGET..HEAD --numstat | grep "filename"
+# Compare with claimed "+N/-M строк" in File-by-File Analysis
+# If ANY number doesn't match → fix to exact numstat value
+```
+
+**Issue/PR References:**
+```bash
+# For each #N in changelog, verify type (Forgejo)
+curl -s -H "Authorization: token $FORGEJO_API_TOKEN" \
+  "$FORGEJO_API_URL/repos/OWNER/REPO/issues/N" \
+  | jq '{number: .number, is_pr: (.pull_request != null)}'
+# If is_pr=true → must be "PR #N" with /pulls/N URL, NOT in "Issues" table
+
+# For GitHub
+gh api repos/OWNER/REPO/issues/N --jq '.pull_request != null'
 ```
 
 #### Step 3: Classification
@@ -351,6 +413,8 @@ Add to document footer:
 - [ ] **Все #N — кликабельные ссылки с видимым URL**
 - [ ] **Имя файла в формате ISO 8601 с датой**
 - [ ] **Fact-checking пройден (stats, commits, tests verified)**
+- [ ] **Per-file stats из git diff --numstat (НЕ приблизительные!)**
+- [ ] **Все #N проверены: issue vs PR через API (Step 1.5)**
 - [ ] **Code Verification пройден (methods, endpoints, files verified)**
 - [ ] **Verification Report section добавлен в footer**
 
@@ -390,6 +454,22 @@ PR_LINK="[PR #51](${REPO_URL}/pulls/51) (${REPO_URL}/pulls/51)"
 | Commit hash | `/commit/{hash}` | `[abc123](url/commit/abc123)` |
 
 **Apply to ALL occurrences of #N in the document!**
+
+## NEVER Trust PR Description (CRITICAL)
+
+**PR body/description is written by humans and OFTEN becomes stale.**
+
+Common PR description errors:
+- Test counts from first commit (not updated after review fixes)
+- Stats from before additional commits were added
+- "100% coverage" claims not reflecting actual behavior
+- Checkbox states not matching implementation
+
+**Rules:**
+1. **NEVER** copy stats from PR description — always compute from `git diff` and `git log`
+2. **NEVER** copy test counts from PR body — always run `grep -c "def test_"` on actual files
+3. **NEVER** trust claim wording from PR body — verify against actual code/docs
+4. PR description is ONLY useful for understanding intent, not facts
 
 ## Mandatory Fact-Checking (CRITICAL)
 
@@ -446,20 +526,30 @@ Include in document footer:
 
 **Filename Format (ISO 8601):**
 ```
-docs/{YYYY-MM-DD}_BRANCH_CHANGELOG_{branch}_{PR}.md
+docs/{YYYY-MM-DD}_BRANCH_CHANGELOG_{type}_{branch-name}_PR{N}.md
 ```
 
 Examples:
 - With PR: `2026-01-23_BRANCH_CHANGELOG_fix_voice-key-naming_PR51.md`
 - Without PR: `2026-01-23_BRANCH_CHANGELOG_fix_voice-key-naming.md`
 
-Branch name sanitization: replace `/` with `_`
-- `feat/my-feature` → `feat_my-feature`
+**Branch name sanitization:**
+
+1. **Worktree-based repos** (branch = `{worktree}/{type}/{name}`):
+   - Remove worktree prefix: `jaine-speech/fix/output-format` → `fix/output-format`
+   - Replace `/` with `_`: `fix/output-format` → `fix_output-format`
+   - Result: `fix_output-format`
+
+2. **Standard repos** (branch = `{type}/{name}`):
+   - Replace `/` with `_`: `feat/my-feature` → `feat_my-feature`
+
+**Detection:** If branch contains 2+ slashes AND first segment matches a known worktree directory, treat as worktree-based.
 
 **PR Number Detection:**
 1. Query Forgejo/GitHub API for PRs with current branch as head
 2. If PR found → include `_PR{number}` in filename
 3. If not found → omit PR suffix
+4. **ALWAYS check for PR** — don't skip this step!
 
 ## When to Use Sequential Thinking
 

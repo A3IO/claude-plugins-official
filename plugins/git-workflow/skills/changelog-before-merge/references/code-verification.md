@@ -21,12 +21,14 @@ Parse generated markdown and collect:
 
 ```python
 claims = {
-    "methods": [],      # method_name(), function_name()
-    "endpoints": [],    # /api/endpoint-name
-    "new_files": [],    # Files marked as NEW
-    "events": [],       # SSE events, WebSocket messages
-    "cli_options": [],  # --option-name
-    "classes": [],      # class ClassName
+    "methods": [],        # method_name(), function_name()
+    "endpoints": [],      # /api/endpoint-name
+    "new_files": [],      # Files marked as NEW
+    "events": [],         # SSE events, WebSocket messages
+    "cli_options": [],    # --option-name
+    "classes": [],        # class ClassName
+    "per_file_stats": [], # +N/-M строк per file (from File-by-File Analysis)
+    "issue_pr_refs": [],  # #N references — is it issue or PR?
 }
 ```
 
@@ -36,6 +38,8 @@ Find in document:
 - New files marked as NEW
 - SSE/WebSocket events
 - CLI options: `--option-name`
+- Per-file line counts: `+N/-M строк` in File-by-File Analysis tables
+- Issue/PR references: all `#N` patterns
 
 ### Step 2: Run Verification Commands
 
@@ -71,6 +75,26 @@ echo "=== CLIENT ===" && grep "{name}" src/**/client.py
 **CLI Options:**
 ```bash
 grep -rn "\-\-{option}" src/**/cli/*.py
+```
+
+**Per-File Line Counts:**
+```bash
+# Must match git diff --numstat EXACTLY
+git diff TARGET..HEAD --numstat | grep "filename"
+# Compare with "+N/-M строк" claims in File-by-File Analysis
+# NEVER trust LLM-estimated counts — numstat is the only truth
+```
+
+**Issue/PR References:**
+```bash
+# Forgejo: check if #N is issue or PR
+curl -s -H "Authorization: token $FORGEJO_API_TOKEN" \
+  "$FORGEJO_API_URL/repos/OWNER/REPO/issues/N" \
+  | jq '{number: .number, is_pr: (.pull_request != null)}'
+# is_pr=true → "PR #N" with /pulls/N URL, NOT in "Issues" table
+
+# GitHub: same check
+gh api repos/OWNER/REPO/issues/N --jq '.pull_request != null'
 ```
 
 ### Step 3: Classification

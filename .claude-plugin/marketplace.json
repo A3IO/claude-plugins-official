@@ -28,6 +28,17 @@
       },
       "source": "./plugins/git-workflow",
       "category": "development"
+    },
+    {
+      "name": "jhookify",
+      "description": "Enhanced hookify: Claude-visible warnings (additionalContext), block reasons (permissionDecisionReason), global rules, UserPromptSubmit fixes",
+      "version": "1.0.0",
+      "author": {
+        "name": "JAINE",
+        "email": "jaine@local"
+      },
+      "source": "./plugins/jhookify",
+      "category": "development"
     }
   ]
 }

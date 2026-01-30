@@ -62,12 +62,15 @@ On Forgejo (and GitHub), PRs share the same ID space as issues. `#48` could be a
 
 ```bash
 # Forgejo: check if #N is issue or PR
+# IMPORTANT: Replace {owner}, {repo}, {N} with ACTUAL values from git remote and commit messages!
+# Example for repo 0_INFRA/STATUSLINE checking #45:
 curl -s -H "Authorization: token $FORGEJO_API_TOKEN" \
-  "$FORGEJO_API_URL/repos/OWNER/REPO/issues/N" | jq '.pull_request != null'
+  "$FORGEJO_API_URL/repos/0_INFRA/STATUSLINE/issues/45" | jq '.pull_request != null'
 # true → it's a PR, false → it's an issue
+# General pattern: $FORGEJO_API_URL/repos/{owner}/{repo}/issues/{N}
 
 # GitHub: same check
-gh api repos/OWNER/REPO/issues/N --jq '.pull_request != null'
+gh api repos/{owner}/{repo}/issues/{N} --jq '.pull_request != null'
 ```
 
 **Classification:**
@@ -349,13 +352,16 @@ git diff TARGET..HEAD --numstat | grep "filename"
 **Issue/PR References:**
 ```bash
 # For each #N in changelog, verify type (Forgejo)
+# IMPORTANT: Use ACTUAL owner/repo from git remote, ACTUAL issue number!
+# Example: verifying #45 in repo 0_INFRA/STATUSLINE
 curl -s -H "Authorization: token $FORGEJO_API_TOKEN" \
-  "$FORGEJO_API_URL/repos/OWNER/REPO/issues/N" \
+  "$FORGEJO_API_URL/repos/0_INFRA/STATUSLINE/issues/45" \
   | jq '{number: .number, is_pr: (.pull_request != null)}'
 # If is_pr=true → must be "PR #N" with /pulls/N URL, NOT in "Issues" table
+# General pattern: $FORGEJO_API_URL/repos/{owner}/{repo}/issues/{N}
 
 # For GitHub
-gh api repos/OWNER/REPO/issues/N --jq '.pull_request != null'
+gh api repos/{owner}/{repo}/issues/{N} --jq '.pull_request != null'
 ```
 
 #### Step 3: Classification

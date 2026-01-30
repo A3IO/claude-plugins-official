@@ -61,16 +61,13 @@ After extracting `#N` references from commit messages, **VERIFY each reference t
 On Forgejo (and GitHub), PRs share the same ID space as issues. `#48` could be a PR, not an issue!
 
 ```bash
-# Forgejo: check if #N is issue or PR
-# IMPORTANT: Replace {owner}, {repo}, {N} with ACTUAL values from git remote and commit messages!
-# Example for repo 0_INFRA/STATUSLINE checking #45:
-curl -s -H "Authorization: token $FORGEJO_API_TOKEN" \
-  "$FORGEJO_API_URL/repos/0_INFRA/STATUSLINE/issues/45" | jq '.pull_request != null'
-# true → it's a PR, false → it's an issue
-# General pattern: $FORGEJO_API_URL/repos/{owner}/{repo}/issues/{N}
-
-# GitHub: same check
-gh api repos/{owner}/{repo}/issues/{N} --jq '.pull_request != null'
+# DETERMINISTIC: Script auto-detects platform, owner/repo, and token from environment
+# Just pass the comma-separated reference numbers — script handles everything else
+bash "${CLAUDE_PLUGIN_ROOT}/scripts/check-issue-type.sh" --numbers 45,48,49
+# Output (one JSON line per reference):
+# {"number":45,"type":"issue","url":"http://192.168.31.116:3300/0_INFRA/STATUSLINE/issues/45"}
+# {"number":48,"type":"pr","url":"http://192.168.31.116:3300/0_INFRA/STATUSLINE/pulls/48"}
+# {"number":49,"type":"pr","url":"http://192.168.31.116:3300/0_INFRA/STATUSLINE/pulls/49"}
 ```
 
 **Classification:**
@@ -110,6 +107,12 @@ For each significant change, analyze:
    - What was the symptom?
    - What was the technical cause?
    - How was it fixed?
+   - **Which commit contains the fix?** Don't guess from commit message — verify:
+     ```bash
+     # For each bug fix, check per-commit file content to confirm attribution
+     git show COMMIT:path/to/file | head -30
+     # Compare with adjacent commits to find where the fix actually landed
+     ```
 
 2. **Architecture Impact** (for features/refactors)
    - What modules are affected?
@@ -225,6 +228,9 @@ Include **Commit Type Distribution** table:
 ### 5. Bug Fixes (Root Cause Analysis)
 
 **Format for EACH bug:**
+
+> **CRITICAL:** The `(commit)` hash MUST be verified via `git show COMMIT:file` — never infer from commit message semantics alone. A file may be modified in multiple commits, and the fix may land in a different commit than expected.
+
 ```markdown
 ### Bug #N: [Short Title] (commit)
 
@@ -351,17 +357,10 @@ git diff TARGET..HEAD --numstat | grep "filename"
 
 **Issue/PR References:**
 ```bash
-# For each #N in changelog, verify type (Forgejo)
-# IMPORTANT: Use ACTUAL owner/repo from git remote, ACTUAL issue number!
-# Example: verifying #45 in repo 0_INFRA/STATUSLINE
-curl -s -H "Authorization: token $FORGEJO_API_TOKEN" \
-  "$FORGEJO_API_URL/repos/0_INFRA/STATUSLINE/issues/45" \
-  | jq '{number: .number, is_pr: (.pull_request != null)}'
-# If is_pr=true → must be "PR #N" with /pulls/N URL, NOT in "Issues" table
-# General pattern: $FORGEJO_API_URL/repos/{owner}/{repo}/issues/{N}
-
-# For GitHub
-gh api repos/{owner}/{repo}/issues/{N} --jq '.pull_request != null'
+# DETERMINISTIC: Pass all #N references as comma-separated list
+bash "${CLAUDE_PLUGIN_ROOT}/scripts/check-issue-type.sh" --numbers 45,48,49
+# Output: {"number":N,"type":"issue"|"pr","url":"..."} per line
+# If type=pr → must be "PR #N" with /pulls/N URL, NOT in "Issues" table
 ```
 
 #### Step 3: Classification

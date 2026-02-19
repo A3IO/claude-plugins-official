@@ -1,0 +1,9 @@
+{
+  "name": "csharp-lsp",
+  "version": "2025.12.19",
+  "description": "OmniSharp language server for C# development",
+  "author": {
+    "name": "Anthropic",
+    "email": "support@anthropic.com"
+  }
+}

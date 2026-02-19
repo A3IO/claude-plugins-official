@@ -1,0 +1,9 @@
+{
+  "name": "kotlin-lsp",
+  "version": "2026.01.07",
+  "description": "Kotlin language server for Kotlin development",
+  "author": {
+    "name": "Anthropic",
+    "email": "support@anthropic.com"
+  }
+}

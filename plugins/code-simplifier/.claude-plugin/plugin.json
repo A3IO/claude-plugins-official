@@ -1,6 +1,6 @@
 {
   "name": "code-simplifier",
-  "version": "1.0.0",
+  "version": "2026.01.08",
   "description": "Agent that simplifies and refines code for clarity, consistency, and maintainability while preserving functionality",
   "author": {
     "name": "Anthropic",

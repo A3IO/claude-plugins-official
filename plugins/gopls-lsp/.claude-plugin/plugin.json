@@ -1,0 +1,9 @@
+{
+  "name": "gopls-lsp",
+  "version": "2025.12.19",
+  "description": "Go language server for code intelligence and navigation",
+  "author": {
+    "name": "Anthropic",
+    "email": "support@anthropic.com"
+  }
+}

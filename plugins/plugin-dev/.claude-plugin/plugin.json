@@ -1,0 +1,9 @@
+{
+  "name": "plugin-dev",
+  "version": "2026.02.05",
+  "description": "Plugin development toolkit for creating Claude Code plugins",
+  "author": {
+    "name": "Anthropic",
+    "email": "support@anthropic.com"
+  }
+}

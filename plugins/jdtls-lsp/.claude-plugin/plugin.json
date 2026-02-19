@@ -1,0 +1,9 @@
+{
+  "name": "jdtls-lsp",
+  "version": "2025.12.19",
+  "description": "Eclipse JDT language server for Java development",
+  "author": {
+    "name": "Anthropic",
+    "email": "support@anthropic.com"
+  }
+}

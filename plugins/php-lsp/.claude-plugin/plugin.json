@@ -1,0 +1,9 @@
+{
+  "name": "php-lsp",
+  "version": "2025.12.19",
+  "description": "Intelephense language server for PHP development",
+  "author": {
+    "name": "Anthropic",
+    "email": "support@anthropic.com"
+  }
+}

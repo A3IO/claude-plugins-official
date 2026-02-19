@@ -6,5 +6,12 @@
     "url": "https://greptile.com"
   },
   "homepage": "https://greptile.com/docs",
-  "keywords": ["code-review", "pull-requests", "github", "gitlab", "ai"]
+  "keywords": [
+    "code-review",
+    "pull-requests",
+    "github",
+    "gitlab",
+    "ai"
+  ],
+  "version": "2026.01.05"
 }

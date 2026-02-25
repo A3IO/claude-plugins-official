@@ -1,32 +1,6 @@
 # JSON Schemas
 
-This document defines the JSON schemas used by skill-creator-edge.
-
-## Working with JSON Files
-
-### Initialize a new file with correct structure
-
-```bash
-scripts/init_json.py <type> <output-path>
-
-# Examples:
-scripts/init_json.py evals evals/evals.json
-scripts/init_json.py grading run-1/grading.json
-scripts/init_json.py benchmark benchmarks/2026-01-15/benchmark.json
-scripts/init_json.py metrics run-1/outputs/metrics.json
-```
-
-### Validate an existing file
-
-```bash
-scripts/validate_json.py <file-path> [--type <type>]
-
-# Examples:
-scripts/validate_json.py evals/evals.json
-scripts/validate_json.py run-1/grading.json --type grading
-```
-
-The validator infers the type from the filename when possible.
+This document defines the JSON schemas used by skill-creator.
 
 ---
 
@@ -224,15 +198,19 @@ Output from the executor agent. Located at `<run-dir>/outputs/metrics.json`.
 
 Wall clock timing for a run. Located at `<run-dir>/timing.json`.
 
+**How to capture:** When a subagent task completes, the task notification includes `total_tokens` and `duration_ms`. Save these immediately — they are not persisted anywhere else and cannot be recovered after the fact.
+
 ```json
 {
+  "total_tokens": 84852,
+  "duration_ms": 23332,
+  "total_duration_seconds": 23.3,
   "executor_start": "2026-01-15T10:30:00Z",
   "executor_end": "2026-01-15T10:32:45Z",
   "executor_duration_seconds": 165.0,
   "grader_start": "2026-01-15T10:32:46Z",
   "grader_end": "2026-01-15T10:33:12Z",
-  "grader_duration_seconds": 26.0,
-  "total_duration_seconds": 191.0
+  "grader_duration_seconds": 26.0
 }
 ```
 
@@ -257,6 +235,7 @@ Output from Benchmark mode. Located at `benchmarks/<timestamp>/benchmark.json`.
   "runs": [
     {
       "eval_id": 1,
+      "eval_name": "Ocean",
       "configuration": "with_skill",
       "run_number": 1,
       "result": {
@@ -308,9 +287,22 @@ Output from Benchmark mode. Located at `benchmarks/<timestamp>/benchmark.json`.
 
 **Fields:**
 - `metadata`: Information about the benchmark run
-- `runs[]`: Individual run results with expectations and notes
+  - `skill_name`: Name of the skill
+  - `timestamp`: When the benchmark was run
+  - `evals_run`: List of eval names or IDs
+  - `runs_per_configuration`: Number of runs per config (e.g. 3)
+- `runs[]`: Individual run results
+  - `eval_id`: Numeric eval identifier
+  - `eval_name`: Human-readable eval name (used as section header in the viewer)
+  - `configuration`: Must be `"with_skill"` or `"without_skill"` (the viewer uses this exact string for grouping and color coding)
+  - `run_number`: Integer run number (1, 2, 3...)
+  - `result`: Nested object with `pass_rate`, `passed`, `total`, `time_seconds`, `tokens`, `errors`
 - `run_summary`: Statistical aggregates per configuration
+  - `with_skill` / `without_skill`: Each contains `pass_rate`, `time_seconds`, `tokens` objects with `mean` and `stddev` fields
+  - `delta`: Difference strings like `"+0.50"`, `"+13.0"`, `"+1700"`
 - `notes`: Freeform observations from the analyzer
+
+**Important:** The viewer reads these field names exactly. Using `config` instead of `configuration`, or putting `pass_rate` at the top level of a run instead of nested under `result`, will cause the viewer to show empty/zero values. Always reference this schema when generating benchmark.json manually.
 
 ---
 

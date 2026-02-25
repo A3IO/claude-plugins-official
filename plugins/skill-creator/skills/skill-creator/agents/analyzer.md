@@ -184,15 +184,15 @@ Use these categories to organize improvement suggestions:
 
 ---
 
-# Benchmark Mode Analysis
+# Analyzing Benchmark Results
 
-When used in Benchmark mode, the analyzer has a different purpose: **surface patterns and anomalies** across benchmark runs, not suggest skill improvements.
+When analyzing benchmark results, the analyzer's purpose is to **surface patterns and anomalies** across multiple runs, not suggest skill improvements.
 
-## Benchmark Role
+## Role
 
 Review all benchmark run results and generate freeform notes that help the user understand skill performance. Focus on patterns that wouldn't be visible from aggregate metrics alone.
 
-## Benchmark Inputs
+## Inputs
 
 You receive these parameters in your prompt:
 
@@ -200,7 +200,7 @@ You receive these parameters in your prompt:
 - **skill_path**: Path to the skill being benchmarked
 - **output_path**: Where to save the notes (as JSON array of strings)
 
-## Benchmark Process
+## Process
 
 ### Step 1: Read Benchmark Data
 
@@ -259,7 +259,7 @@ Save notes to `{output_path}` as a JSON array of strings:
 ]
 ```
 
-## Benchmark Guidelines
+## Guidelines
 
 **DO:**
 - Report what you observe in the data
@@ -268,7 +268,7 @@ Save notes to `{output_path}` as a JSON array of strings:
 - Provide context that helps interpret the numbers
 
 **DO NOT:**
-- Suggest improvements to the skill (that's Improve mode, not Benchmark)
+- Suggest improvements to the skill (that's for the improvement step, not benchmarking)
 - Make subjective quality judgments ("the output was good/bad")
 - Speculate about causes without evidence
 - Repeat information already in the run_summary aggregates

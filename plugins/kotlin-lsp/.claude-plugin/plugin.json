@@ -1,6 +1,6 @@
 {
   "name": "kotlin-lsp",
-  "version": "2026.01.07",
+  "version": "2026.02.25",
   "description": "Kotlin language server for Kotlin development",
   "author": {
     "name": "Anthropic",

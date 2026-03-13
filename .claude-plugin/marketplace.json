@@ -711,6 +711,17 @@
       "homepage": "https://github.com/semgrep/mcp-marketplace.git"
     },
     {
+      "name": "pagerduty",
+      "description": "Enhance code quality and security through PagerDuty risk scoring and incident correlation. Score pre-commit diffs against historical incident data and surface deployment risk before you ship.",
+      "category": "monitoring",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/PagerDuty/claude-code-plugins.git",
+        "sha": "b16c23e0d790deceaa7a6182616d0e36673f2eae"
+      },
+      "homepage": "https://github.com/PagerDuty/claude-code-plugins"
+    },
+    {
       "name": "postman",
       "description": "Full API lifecycle management for Claude Code. Sync collections, generate client code, discover APIs, run tests, create mocks, publish docs, and audit security. Powered by the Postman MCP Server.",
       "category": "development",

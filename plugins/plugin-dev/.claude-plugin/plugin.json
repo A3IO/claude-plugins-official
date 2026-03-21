@@ -1,7 +1,7 @@
 {
   "name": "plugin-dev",
   "version": "2026.02.25",
-  "description": "Plugin development toolkit for creating Claude Code plugins",
+  "description": "Plugin development toolkit with skills for creating agents, commands, hooks, MCP integrations, and comprehensive plugin structure guidance",
   "author": {
     "name": "Anthropic",
     "email": "support@anthropic.com"

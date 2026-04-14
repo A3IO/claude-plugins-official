@@ -191,6 +191,21 @@
       "homepage": "https://docs.base44.com"
     },
     {
+      "name": "bigdata-com",
+      "description": "Official Bigdata.com plugin providing financial research, analytics, and intelligence tools powered by Bigdata MCP.",
+      "author": {
+        "name": "RavenPack"
+      },
+      "category": "database",
+      "source": {
+        "source": "git-subdir",
+        "url": "Bigdata-com/bigdata-plugins-marketplace",
+        "path": "plugins/bigdata-com",
+        "ref": "main"
+      },
+      "homepage": "https://docs.bigdata.com"
+    },
+    {
       "name": "box",
       "description": "Work with your Box content directly from Claude Code — search files, organize folders, collaborate with your team, and use Box AI to answer questions, summarize documents, and extract data without leaving your workflow.",
       "category": "productivity",

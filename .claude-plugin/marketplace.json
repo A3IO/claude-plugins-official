@@ -390,6 +390,16 @@
       "homepage": "https://github.com/anthropics/claude-plugins-official/tree/main/plugins/skill-creator"
     },
     {
+      "name": "supabase",
+      "description": "Supabase MCP integration for database operations, authentication, storage, and real-time subscriptions. Manage your Supabase projects, run SQL queries, and interact with your backend directly.",
+      "category": "database",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/supabase-community/supabase-plugin.git"
+      },
+      "homepage": "https://github.com/supabase-community/supabase-plugin"
+    },
+    {
       "name": "superpowers",
       "description": "Superpowers teaches Claude brainstorming, subagent driven development with built in code review, systematic debugging, and red/green TDD. Additionally, it teaches Claude how to author and test new skills.",
       "category": "development",

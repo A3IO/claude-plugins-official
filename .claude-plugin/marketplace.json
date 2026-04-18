@@ -586,6 +586,21 @@
         "sha": "ce435be18a700dc849d6a63a80da4816d1e2128c"
       },
       "homepage": "https://www.mintlify.com/"
+    },
+    {
+      "name": "miro",
+      "description": "Secure access to Miro boards. Enables AI to read board context, create diagrams, and generate code with enterprise-grade security.",
+      "author": {
+        "name": "Miro"
+      },
+      "category": "design",
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/miroapp/miro-ai.git",
+        "path": "claude-plugins/miro",
+        "ref": "main"
+      },
+      "homepage": "https://miro.com"
     }
   ]
 }

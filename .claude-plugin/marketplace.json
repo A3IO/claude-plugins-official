@@ -521,6 +521,16 @@
         "sha": "7f18e11d694b9ae62ea3009fbbc175f08ae913df"
       },
       "homepage": "https://ai-first.techwolf.ai"
+    },
+    {
+      "name": "goodmem",
+      "description": "GoodMem memory infrastructure for AI agents. Use Python SDK skills to write code that manages embedders, spaces, and memories, or use MCP tools to perform GoodMem operations directly via natural language.",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/PAIR-Systems-Inc/goodmem-claude-code-plugin.git",
+        "sha": "215568baf203887b5d7f8245e0503dd4a81336c2"
+      },
+      "homepage": "https://github.com/PAIR-Systems-Inc/goodmem-claude-code-plugin"
     }
   ]
 }

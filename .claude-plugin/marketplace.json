@@ -642,6 +642,16 @@
         "sha": "40b11ac3466c500cf4625ac016d5c01cd00046f4"
       },
       "homepage": "https://learning.postman.com/docs/developer/postman-mcp-server/"
+    },
+    {
+      "name": "fiftyone",
+      "description": "Build high-quality datasets and computer vision models. Visualize datasets, analyze models, find duplicates, run inference, evaluate predictions, and develop custom plugins.",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/voxel51/fiftyone-skills.git",
+        "sha": "593e0553fc9fd94db52386ada2c9e2074a6ecf89"
+      },
+      "homepage": "https://docs.voxel51.com/"
     }
   ]
 }

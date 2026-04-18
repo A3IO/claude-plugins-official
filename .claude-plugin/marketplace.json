@@ -474,6 +474,17 @@
         "sha": "e671da495f7ec0ed6be5e9fa71e260f886a1dc36"
       },
       "homepage": "https://docs.brightdata.com"
+    },
+    {
+      "name": "astronomer-data-agents",
+      "description": "Data engineering for Apache Airflow and Astronomer. Author DAGs with best practices, debug pipeline failures, trace data lineage, profile tables, migrate Airflow 2 to 3, and manage local and cloud deployments.",
+      "category": "development",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/astronomer/agents.git",
+        "sha": "7ef022b02f5296b5ecc52ba0db3ba9345ec03c9e"
+      },
+      "homepage": "https://github.com/astronomer/agents"
     }
   ]
 }

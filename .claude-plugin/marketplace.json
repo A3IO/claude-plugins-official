@@ -501,16 +501,6 @@
       ]
     },
     {
-      "name": "remember",
-      "description": "Continuous memory for Claude Code. Extracts, summarizes, and compresses conversations into tiered daily logs. Claude remembers what you did yesterday.",
-      "source": {
-        "source": "url",
-        "url": "https://github.com/Digital-Process-Tools/claude-remember.git",
-        "sha": "779ab61d8d412230eeec1840b8ca104bebea4358"
-      },
-      "homepage": "https://github.com/Digital-Process-Tools/claude-remember"
-    },
-    {
       "name": "ai-firstify",
       "description": "AI-first project auditor and re-engineer based on the 9 design principles and 7 design patterns from the TechWolf AI-First Bootcamp",
       "source": {

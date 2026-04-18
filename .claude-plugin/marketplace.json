@@ -621,6 +621,16 @@
         "url": "https://github.com/sonatype/sonatype-guide-claude-plugin.git"
       },
       "homepage": "https://github.com/sonatype/sonatype-guide-claude-plugin.git"
+    },
+    {
+      "name": "nightvision",
+      "description": "Skills for working with NightVision, a DAST and API Discovery platform that finds exploitable vulnerabilities in web applications and REST APIs",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/nvsecurity/nightvision-skills.git",
+        "sha": "7d7a3f342bbf4d02b6e012279800cf91ff0c1c97"
+      },
+      "homepage": "https://github.com/nvsecurity/nightvision-skills"
     }
   ]
 }

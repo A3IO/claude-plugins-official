@@ -601,6 +601,16 @@
         "ref": "main"
       },
       "homepage": "https://miro.com"
+    },
+    {
+      "name": "aikido",
+      "description": "Aikido Security scanning for Claude Code \u2014 SAST, secrets, and IaC vulnerability detection powered by the Aikido MCP server.",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/AikidoSec/aikido-claude-plugin.git",
+        "sha": "d7fa8b8e192680d9a26c1a5dcaead7cf5cdb7139"
+      },
+      "homepage": "https://github.com/AikidoSec/aikido-claude-plugin"
     }
   ]
 }

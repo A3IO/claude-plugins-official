@@ -631,6 +631,17 @@
         "sha": "7d7a3f342bbf4d02b6e012279800cf91ff0c1c97"
       },
       "homepage": "https://github.com/nvsecurity/nightvision-skills"
+    },
+    {
+      "name": "postman",
+      "description": "Full API lifecycle management for Claude Code. Sync collections, generate client code, discover APIs, run tests, create mocks, publish docs, and audit security. Powered by the Postman MCP Server.",
+      "category": "development",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/Postman-Devrel/postman-claude-code-plugin.git",
+        "sha": "40b11ac3466c500cf4625ac016d5c01cd00046f4"
+      },
+      "homepage": "https://learning.postman.com/docs/developer/postman-mcp-server/"
     }
   ]
 }

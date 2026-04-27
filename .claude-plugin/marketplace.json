@@ -73,26 +73,6 @@
       ]
     },
     {
-      "name": "csharp-lsp",
-      "description": "C# language server for code intelligence",
-      "version": "1.0.0",
-      "author": {
-        "name": "Anthropic",
-        "email": "support@anthropic.com"
-      },
-      "source": "./plugins/csharp-lsp",
-      "category": "development",
-      "strict": false,
-      "lspServers": {
-        "csharp-ls": {
-          "command": "csharp-ls",
-          "extensionToLanguage": {
-            ".cs": "csharp"
-          }
-        }
-      }
-    },
-    {
       "name": "fakechat",
       "description": "Localhost web chat for testing the channel notification flow. No tokens, no access control, no third-party service.",
       "category": "development",

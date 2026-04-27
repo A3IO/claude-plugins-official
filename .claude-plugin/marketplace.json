@@ -111,26 +111,6 @@
       "homepage": "https://github.com/huggingface/skills.git"
     },
     {
-      "name": "lua-lsp",
-      "description": "Lua language server for code intelligence",
-      "version": "1.0.0",
-      "author": {
-        "name": "Anthropic",
-        "email": "support@anthropic.com"
-      },
-      "source": "./plugins/lua-lsp",
-      "category": "development",
-      "strict": false,
-      "lspServers": {
-        "lua": {
-          "command": "lua-language-server",
-          "extensionToLanguage": {
-            ".lua": "lua"
-          }
-        }
-      }
-    },
-    {
       "name": "math-olympiad",
       "description": "Solve competition math (IMO, Putnam, USAMO) with adversarial verification that catches what self-verification misses. Fresh-context verifiers attack proofs with specific failure patterns. Calibrated abstention over bluffing.",
       "source": "./plugins/math-olympiad",

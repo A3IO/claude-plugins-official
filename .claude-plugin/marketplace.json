@@ -101,26 +101,6 @@
       "homepage": "https://github.com/anthropics/claude-plugins-public/tree/main/plugins/frontend-design"
     },
     {
-      "name": "gopls-lsp",
-      "description": "Go language server for code intelligence and refactoring",
-      "version": "1.0.0",
-      "author": {
-        "name": "Anthropic",
-        "email": "support@anthropic.com"
-      },
-      "source": "./plugins/gopls-lsp",
-      "category": "development",
-      "strict": false,
-      "lspServers": {
-        "gopls": {
-          "command": "gopls",
-          "extensionToLanguage": {
-            ".go": "go"
-          }
-        }
-      }
-    },
-    {
       "name": "huggingface-skills",
       "description": "Build, train, evaluate, and use open source AI models, datasets, and spaces.",
       "category": "development",

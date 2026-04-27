@@ -206,26 +206,6 @@
       "homepage": "https://github.com/obra/superpowers.git"
     },
     {
-      "name": "swift-lsp",
-      "description": "Swift language server (SourceKit-LSP) for code intelligence",
-      "version": "1.0.0",
-      "author": {
-        "name": "Anthropic",
-        "email": "support@anthropic.com"
-      },
-      "source": "./plugins/swift-lsp",
-      "category": "development",
-      "strict": false,
-      "lspServers": {
-        "sourcekit-lsp": {
-          "command": "sourcekit-lsp",
-          "extensionToLanguage": {
-            ".swift": "swift"
-          }
-        }
-      }
-    },
-    {
       "name": "telegram",
       "description": "Telegram messaging bridge with built-in access control. Manage pairing, allowlists, and policy via /telegram:access.",
       "category": "productivity",

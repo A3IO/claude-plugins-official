@@ -217,7 +217,7 @@
       "source": {
         "source": "url",
         "url": "https://github.com/brightdata/skills.git",
-        "sha": "e671da495f7ec0ed6be5e9fa71e260f886a1dc36"
+        "sha": "44b24797d82cfd535c5b97831d5c6ba86c9d60df"
       },
       "homepage": "https://docs.brightdata.com"
     },
@@ -228,7 +228,7 @@
       "source": {
         "source": "url",
         "url": "https://github.com/astronomer/agents.git",
-        "sha": "7ef022b02f5296b5ecc52ba0db3ba9345ec03c9e"
+        "sha": "5935c4330dea4dfb8e93568956b10a543ecdb3d1"
       },
       "homepage": "https://github.com/astronomer/agents"
     },
@@ -254,7 +254,7 @@
         "url": "https://github.com/techwolf-ai/ai-first-toolkit.git",
         "path": "plugins/ai-firstify",
         "ref": "main",
-        "sha": "7f18e11d694b9ae62ea3009fbbc175f08ae913df"
+        "sha": "852272ec21cebab98202df967dffee127209b6bc"
       },
       "homepage": "https://ai-first.techwolf.ai"
     },
@@ -295,7 +295,7 @@
       "source": {
         "source": "url",
         "url": "https://github.com/mintlify/mintlify-claude-plugin.git",
-        "sha": "ce435be18a700dc849d6a63a80da4816d1e2128c"
+        "sha": "acd6d2e0128c4f235d55cfb8d8c91ecbdd5df8cc"
       },
       "homepage": "https://www.mintlify.com/"
     },
@@ -320,7 +320,7 @@
       "source": {
         "source": "url",
         "url": "https://github.com/AikidoSec/aikido-claude-plugin.git",
-        "sha": "d7fa8b8e192680d9a26c1a5dcaead7cf5cdb7139"
+        "sha": "5d9c13d367218e9b43a11d4502f623ab98859225"
       },
       "homepage": "https://github.com/AikidoSec/aikido-claude-plugin"
     },
@@ -351,7 +351,7 @@
       "source": {
         "source": "url",
         "url": "https://github.com/Postman-Devrel/postman-claude-code-plugin.git",
-        "sha": "40b11ac3466c500cf4625ac016d5c01cd00046f4"
+        "sha": "416e40da03a237df7bf03f4362cf6fc7b989b567"
       },
       "homepage": "https://learning.postman.com/docs/developer/postman-mcp-server/"
     },
@@ -361,7 +361,7 @@
       "source": {
         "source": "url",
         "url": "https://github.com/voxel51/fiftyone-skills.git",
-        "sha": "593e0553fc9fd94db52386ada2c9e2074a6ecf89"
+        "sha": "02bd4ea170ca01a751c2d2dd6bf2df8f62e65626"
       },
       "homepage": "https://docs.voxel51.com/"
     },
@@ -371,7 +371,7 @@
       "source": {
         "source": "url",
         "url": "https://github.com/Digital-Process-Tools/claude-remember.git",
-        "sha": "779ab61d8d412230eeec1840b8ca104bebea4358"
+        "sha": "914445ac5f06a164800ea90ba4db41a0486321ae"
       },
       "homepage": "https://github.com/Digital-Process-Tools/claude-remember"
     }

@@ -219,7 +219,7 @@
       "source": {
         "source": "url",
         "url": "https://github.com/brightdata/skills.git",
-        "sha": "44b24797d82cfd535c5b97831d5c6ba86c9d60df"
+        "sha": "37145178dfc9b52e28dd224afeccc7184f7711fc"
       },
       "homepage": "https://docs.brightdata.com"
     },
@@ -230,7 +230,7 @@
       "source": {
         "source": "url",
         "url": "https://github.com/astronomer/agents.git",
-        "sha": "5935c4330dea4dfb8e93568956b10a543ecdb3d1"
+        "sha": "535a040ca9e27aaed6da13f0f959625fb3294820"
       },
       "homepage": "https://github.com/astronomer/agents"
     },
@@ -322,7 +322,7 @@
       "source": {
         "source": "url",
         "url": "https://github.com/AikidoSec/aikido-claude-plugin.git",
-        "sha": "5d9c13d367218e9b43a11d4502f623ab98859225"
+        "sha": "79ac524f87c9faa9a356ff3d495b8a5b77e01bbd"
       },
       "homepage": "https://github.com/AikidoSec/aikido-claude-plugin"
     },
@@ -363,7 +363,7 @@
       "source": {
         "source": "url",
         "url": "https://github.com/voxel51/fiftyone-skills.git",
-        "sha": "02bd4ea170ca01a751c2d2dd6bf2df8f62e65626"
+        "sha": "a79e53c6fd1784e1476421185f3ed67637e642b4"
       },
       "homepage": "https://docs.voxel51.com/"
     },
@@ -373,7 +373,7 @@
       "source": {
         "source": "url",
         "url": "https://github.com/Digital-Process-Tools/claude-remember.git",
-        "sha": "914445ac5f06a164800ea90ba4db41a0486321ae"
+        "sha": "aa55ba3f553e23f4d84387f5d7ece1ba0ce68d93"
       },
       "homepage": "https://github.com/Digital-Process-Tools/claude-remember"
     }

@@ -353,7 +353,7 @@
       "source": {
         "source": "url",
         "url": "https://github.com/Postman-Devrel/postman-claude-code-plugin.git",
-        "sha": "416e40da03a237df7bf03f4362cf6fc7b989b567"
+        "sha": "812678b3d1d1956815252d8f25e3ccc10d1bca8f"
       },
       "homepage": "https://learning.postman.com/docs/developer/postman-mcp-server/"
     },
@@ -363,7 +363,7 @@
       "source": {
         "source": "url",
         "url": "https://github.com/voxel51/fiftyone-skills.git",
-        "sha": "a79e53c6fd1784e1476421185f3ed67637e642b4"
+        "sha": "8b987ade2d04b85ea82c109f48d7234838b28b82"
       },
       "homepage": "https://docs.voxel51.com/"
     },

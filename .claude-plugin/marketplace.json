@@ -219,7 +219,7 @@
       "source": {
         "source": "url",
         "url": "https://github.com/brightdata/skills.git",
-        "sha": "37145178dfc9b52e28dd224afeccc7184f7711fc"
+        "sha": "071e9d4db77c8561e333799f25ea85f11f7b667d"
       },
       "homepage": "https://docs.brightdata.com"
     },
@@ -363,7 +363,7 @@
       "source": {
         "source": "url",
         "url": "https://github.com/voxel51/fiftyone-skills.git",
-        "sha": "8b987ade2d04b85ea82c109f48d7234838b28b82"
+        "sha": "6c002d680529e35a2e04adc34c03b564a3991728"
       },
       "homepage": "https://docs.voxel51.com/"
     },
@@ -373,7 +373,7 @@
       "source": {
         "source": "url",
         "url": "https://github.com/Digital-Process-Tools/claude-remember.git",
-        "sha": "aa55ba3f553e23f4d84387f5d7ece1ba0ce68d93"
+        "sha": "c9b34417a8132f0416411a0ca51d009a256a3acc"
       },
       "homepage": "https://github.com/Digital-Process-Tools/claude-remember"
     }

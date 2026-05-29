@@ -640,7 +640,15 @@ _COMMIT_SHA_RE = re.compile(r'^\[[^\]]*?\b([0-9a-f]{7,40})\]', re.MULTILINE)
 # widening for `gt create:*` / `gt modify:*` / `gt submit:*` ships in the
 # same change set — without that widening this regex change is dead code
 # because the hook subprocess never spawns for gt invocations. See #2048.
-_GIT_COMMIT_RE = re.compile(r'\b(?:git\s+commit|gt\s+(?:create|modify))(?:\s|$)')
+_GIT_COMMIT_RE = re.compile(
+    # `git -C <path>` and `git -c key=val` global options are allowed between
+    # `git` and `commit` (mirrors the long-standing tolerance in
+    # _GIT_PUSH_RE). Without this, `git -C /repo commit` is silently dropped
+    # by the handler — see #2089's secondary finding. The gt branch has no
+    # global-option layer to worry about.
+    r'\bgit(?:\s+-[Cc]\s+\S+|\s+--\S+=\S+)*\s+commit\b'
+    r'|\bgt\s+(?:create|modify)\b'
+)
 # Match either the `--amend` flag (with the leading whitespace boundary
 # preserved from the original) OR `gt modify` which is semantically an
 # amend. The handler treats matches as "find the pre-amend SHA via reflog

@@ -123,7 +123,7 @@
     },
     {
       "name": "playground",
-      "description": "Creates interactive HTML playgrounds \u2014 self-contained single-file explorers with visual controls, live preview, and prompt output with copy button. Includes templates for design playgrounds, data explorers, concept maps, and document critique.",
+      "description": "Creates interactive HTML playgrounds — self-contained single-file explorers with visual controls, live preview, and prompt output with copy button. Includes templates for design playgrounds, data explorers, concept maps, and document critique.",
       "author": {
         "name": "Anthropic",
         "email": "support@anthropic.com"
@@ -296,8 +296,7 @@
       "category": "development",
       "source": {
         "source": "url",
-        "url": "https://github.com/mintlify/mintlify-claude-plugin.git",
-        "sha": "acd6d2e0128c4f235d55cfb8d8c91ecbdd5df8cc"
+        "url": "https://github.com/mintlify/mintlify-claude-plugin.git"
       },
       "homepage": "https://www.mintlify.com/"
     },
@@ -318,7 +317,7 @@
     },
     {
       "name": "aikido",
-      "description": "Aikido Security scanning for Claude Code \u2014 SAST, secrets, and IaC vulnerability detection powered by the Aikido MCP server.",
+      "description": "Aikido Security scanning for Claude Code — SAST, secrets, and IaC vulnerability detection powered by the Aikido MCP server.",
       "source": {
         "source": "url",
         "url": "https://github.com/AikidoSec/aikido-claude-plugin.git",

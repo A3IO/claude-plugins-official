@@ -320,8 +320,7 @@
       "description": "Aikido Security scanning for Claude Code — SAST, secrets, and IaC vulnerability detection powered by the Aikido MCP server.",
       "source": {
         "source": "url",
-        "url": "https://github.com/AikidoSec/aikido-claude-plugin.git",
-        "sha": "79ac524f87c9faa9a356ff3d495b8a5b77e01bbd"
+        "url": "https://github.com/AikidoSec/aikido-claude-plugin.git"
       },
       "homepage": "https://github.com/AikidoSec/aikido-claude-plugin"
     },
@@ -340,8 +339,7 @@
       "description": "Skills for working with NightVision, a DAST and API Discovery platform that finds exploitable vulnerabilities in web applications and REST APIs",
       "source": {
         "source": "url",
-        "url": "https://github.com/nvsecurity/nightvision-skills.git",
-        "sha": "7d7a3f342bbf4d02b6e012279800cf91ff0c1c97"
+        "url": "https://github.com/nvsecurity/nightvision-skills.git"
       },
       "homepage": "https://github.com/nvsecurity/nightvision-skills"
     },
@@ -351,8 +349,7 @@
       "category": "development",
       "source": {
         "source": "url",
-        "url": "https://github.com/Postman-Devrel/postman-claude-code-plugin.git",
-        "sha": "812678b3d1d1956815252d8f25e3ccc10d1bca8f"
+        "url": "https://github.com/Postman-Devrel/postman-claude-code-plugin.git"
       },
       "homepage": "https://learning.postman.com/docs/developer/postman-mcp-server/"
     },
@@ -361,8 +358,7 @@
       "description": "Build high-quality datasets and computer vision models. Visualize datasets, analyze models, find duplicates, run inference, evaluate predictions, and develop custom plugins.",
       "source": {
         "source": "url",
-        "url": "https://github.com/voxel51/fiftyone-skills.git",
-        "sha": "6c002d680529e35a2e04adc34c03b564a3991728"
+        "url": "https://github.com/voxel51/fiftyone-skills.git"
       },
       "homepage": "https://docs.voxel51.com/"
     },

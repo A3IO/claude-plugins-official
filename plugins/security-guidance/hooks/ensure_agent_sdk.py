@@ -65,21 +65,41 @@ SDK_BOOTSTRAP_PHASE_CODES = {
     "main": 4,  # uncaught exception above main()
 }
 SDK_BOOTSTRAP_ERR_CODES = {
-    "pip_no_match":       1,
-    "dns_fail":           2,
-    "conn_refused":       3,
-    "ssl_verify":         4,
-    "perm_denied":        5,
-    "no_pip":             6,
-    "disk_full":          7,
-    "proxy_auth":         8,
-    "stderr_timeout":     9,  # pip stderr containing "timeout"/"timed out"
-    "subprocess_timeout": 10, # subprocess.TimeoutExpired (>120s)
-    # 11–98 reserved for future categories; APPEND-ONLY.
+    "pip_no_match":         1,
+    "dns_fail":             2,
+    "conn_refused":         3,
+    "ssl_verify":           4,
+    "perm_denied":          5,
+    "no_pip":               6,
+    "disk_full":            7,
+    "proxy_auth":           8,
+    "stderr_timeout":       9,   # pip stderr containing "timeout"/"timed out"
+    "subprocess_timeout":   10,  # subprocess.TimeoutExpired (>120s)
+    # Venv-stage specific categories added after PR #2112 telemetry surfaced
+    # 2,406 phase=2/err=99 sessions in the first 3h of v2.0.1 — venv phase
+    # failing in ways the original pip-flavored patterns didn't catch. These
+    # all split out of what was previously collapsing to _uncategorized.
+    "venv_ensurepip_fail":  11,  # Debian/Ubuntu missing python3-venv;
+                                 # stderr mentions ensurepip non-zero exit
+                                 # or "ensurepip is not available"
+    "venv_path_too_long":   12,  # Windows MAX_PATH (260) or POSIX
+                                 # ENAMETOOLONG — venv writes deep paths
+                                 # under state_dir/agent-sdk-venv/Lib/...
+    "venv_no_module":       13,  # `python3 -m venv` itself missing — "No
+                                 # module named 'venv'" / "No module named venv"
+    "venv_already_exists":  14,  # Errno 17 / "file exists" — sentinel race
+                                 # past O_EXCL or stale dir survived --clear
+    "venv_setup_failed":    15,  # Generic "virtual environment was not
+                                 # created successfully" — catches the long
+                                 # tail of venv setup failures that don't
+                                 # match a more specific category above
+    # 16–98 reserved for future categories; APPEND-ONLY.
     # 99 catches everything else (including "exc:<TypeName>" and "other:<tail>"
     # — the original string is debug-loggable but the integer is what makes
-    # it to telemetry).
-    "_uncategorized":     99,
+    # it to telemetry). For the "other:" tail, `sdk_bootstrap_stderr_sig`
+    # carries a bounded integer hash so we can still distinguish patterns
+    # in BQ aggregation.
+    "_uncategorized":       99,
 }
 
 
@@ -105,6 +125,37 @@ def _encode_err_kind(s):
         return SDK_BOOTSTRAP_ERR_CODES["_uncategorized"]
     # Unknown string — still emit as uncategorized rather than dropping
     return SDK_BOOTSTRAP_ERR_CODES["_uncategorized"]
+
+
+def _encode_stderr_sig(err_kind):
+    """Bounded integer hash of the stderr tail captured in "other:<tail>"
+    err_kinds. Lets us distinguish patterns INSIDE the _uncategorized
+    (code 99) bucket without unbounded cardinality.
+
+    Returns 0 for non-"other:" err_kinds (so the field auto-omits from
+    emit_metrics on categorized failures — see the emit block in main()).
+
+    Strategy: take the tail's first ~30 chars (post-lowercase, post-trim),
+    SHA-1, fold the first 2 bytes to 0–999. Different stderr messages
+    cluster into different buckets; same stderr always maps to the same
+    bucket. Cardinality is bounded at 1000, well below any "high
+    cardinality" alarm — and a real failure mode typically produces
+    near-identical stderr across thousands of machines, so 1000 buckets
+    is comfortably wide.
+
+    Why first ~30 chars: stderr like "ERROR: Command failed: <full
+    path>" varies the tail wildly (paths) but the categorization signal
+    is in the leading words. Dropping the suffix focuses the hash on
+    the discriminative part.
+    """
+    if not err_kind or not err_kind.startswith("other:"):
+        return 0
+    import hashlib
+    tail = err_kind[len("other:"):].strip().lower()[:30]
+    if not tail:
+        return 0
+    h = hashlib.sha1(tail.encode("utf-8", errors="replace")).digest()
+    return int.from_bytes(h[:2], "big") % 1000
 
 
 def _sdk_on_syspath() -> bool:
@@ -245,7 +296,34 @@ def main() -> tuple[int, str, str]:
         else:
             stderr_str = str(stderr_b)
         s = stderr_str.lower()
-        if "no matching distribution" in s or "could not find a version" in s:
+        # Venv-specific patterns checked FIRST — they overlap with some pip
+        # patterns (e.g. "no module named ensurepip" could match no_pip OR
+        # venv_ensurepip_fail; the venv-stage interpretation is the right
+        # one when err_phase=="venv"). Order is venv-most-specific →
+        # pip-historical → generic.
+        if err_phase == "venv" and (
+            "ensurepip is not available" in s
+            or ("ensurepip" in s and "returned non-zero" in s)
+            or "the virtual environment was not created" in s and "ensurepip" in s
+        ):
+            err_kind = "venv_ensurepip_fail"
+        elif err_phase == "venv" and (
+            "[errno 36]" in s
+            or "file name too long" in s
+            or "path too long" in s
+        ):
+            err_kind = "venv_path_too_long"
+        elif err_phase == "venv" and (
+            "no module named venv" in s
+            or "no module named 'venv'" in s
+        ):
+            err_kind = "venv_no_module"
+        elif err_phase == "venv" and (
+            "[errno 17]" in s
+            or ("file exists" in s and "venv" in s)
+        ):
+            err_kind = "venv_already_exists"
+        elif "no matching distribution" in s or "could not find a version" in s:
             err_kind = "pip_no_match"
         elif "name or service not known" in s or "name resolution" in s \
                 or "nodename nor servname" in s or "temporary failure in name" in s:
@@ -264,6 +342,15 @@ def main() -> tuple[int, str, str]:
             err_kind = "proxy_auth"
         elif "timeout" in s or "timed out" in s:
             err_kind = "stderr_timeout"
+        elif err_phase == "venv" and (
+            "virtual environment was not created" in s
+            or "error: command" in s and "venv" in s
+        ):
+            # Generic venv-setup catch-all — matched AFTER the more specific
+            # venv patterns above so we don't shadow them, but BEFORE the
+            # other: fallback so generic venv setup failures get their own
+            # bucket instead of polluting the long-tail signature space.
+            err_kind = "venv_setup_failed"
         else:
             # First 60 chars of the last non-empty stderr line — bounded to
             # stay inside CC's metric value-length budget. Real failure modes
@@ -372,6 +459,14 @@ if __name__ == "__main__":
         # failure path, e.g. state_dir.mkdir perm-denied).
         metrics["sdk_bootstrap_phase"] = _encode_phase(err_phase or "pre")
         metrics["sdk_bootstrap_err"] = _encode_err_kind(err_kind)
+        # For "other:<tail>" (encoded err==99), emit a bounded integer
+        # hash of the stderr tail so BQ can distinguish patterns inside
+        # the _uncategorized bucket without unbounded cardinality. Zero
+        # when err_kind is categorized — the schema reader treats 0 as
+        # "no signal", matching the absence convention.
+        sig = _encode_stderr_sig(err_kind)
+        if sig:
+            metrics["sdk_bootstrap_stderr_sig"] = sig
     pv = _plugin_version_int()
     if pv:
         metrics["pv"] = pv

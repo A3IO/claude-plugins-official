@@ -106,7 +106,7 @@
       "category": "development",
       "source": {
         "source": "url",
-        "url": "https://github.com/huggingface/skills.git"
+        "url": "https://github.com/A3IO/huggingface-skills.git"
       },
       "homepage": "https://github.com/huggingface/skills.git"
     },
@@ -273,10 +273,10 @@
       "category": "productivity",
       "source": {
         "source": "git-subdir",
-        "url": "https://github.com/zapier/zapier-mcp.git",
+        "url": "https://github.com/A3IO/zapier-zapier-mcp.git",
         "path": "plugins/zapier",
-        "ref": "main",
-        "sha": "f34a7854febed415c9ef766eec1c66529ef0668e"
+        "ref": "jaine",
+        "sha": "034ed4be7e21047d743d534c37e9da2e5d993540"
       },
       "homepage": "https://github.com/zapier/zapier-mcp/tree/main/plugins/zapier"
     },

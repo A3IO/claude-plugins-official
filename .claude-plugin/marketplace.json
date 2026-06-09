@@ -246,7 +246,7 @@
         "url": "https://github.com/techwolf-ai/ai-first-toolkit.git",
         "path": "plugins/ai-firstify",
         "ref": "main",
-        "sha": "852272ec21cebab98202df967dffee127209b6bc"
+        "sha": "c84f30c27f38160892e5ff1c1d0b01d76cf27f74"
       },
       "homepage": "https://ai-first.techwolf.ai"
     },

@@ -106,7 +106,8 @@
       "category": "development",
       "source": {
         "source": "url",
-        "url": "https://github.com/A3IO/huggingface-skills.git"
+        "url": "https://github.com/huggingface/skills.git",
+        "sha": "d7223848c3895fbd447faf2aec73e0a6cdd7fdcd"
       },
       "homepage": "https://github.com/huggingface/skills.git"
     },

@@ -326,15 +326,6 @@
       "homepage": "https://github.com/sonatype/sonatype-guide-claude-plugin.git"
     },
     {
-      "name": "nightvision",
-      "description": "Skills for working with NightVision, a DAST and API Discovery platform that finds exploitable vulnerabilities in web applications and REST APIs",
-      "source": {
-        "source": "url",
-        "url": "https://github.com/nvsecurity/nightvision-skills.git"
-      },
-      "homepage": "https://github.com/nvsecurity/nightvision-skills"
-    },
-    {
       "name": "postman",
       "description": "Full API lifecycle management for Claude Code. Sync collections, generate client code, discover APIs, run tests, create mocks, publish docs, and audit security. Powered by the Postman MCP Server.",
       "category": "development",

@@ -307,15 +307,6 @@
       "homepage": "https://miro.com"
     },
     {
-      "name": "aikido",
-      "description": "Aikido Security scanning for Claude Code \u2014 SAST, secrets, and IaC vulnerability detection powered by the Aikido MCP server.",
-      "source": {
-        "source": "url",
-        "url": "https://github.com/AikidoSec/aikido-claude-plugin.git"
-      },
-      "homepage": "https://github.com/AikidoSec/aikido-claude-plugin"
-    },
-    {
       "name": "sonatype-guide",
       "description": "Sonatype Guide MCP server for software supply chain intelligence and dependency security. Analyze dependencies for vulnerabilities, get secure version recommendations, and check component quality metrics.",
       "category": "security",

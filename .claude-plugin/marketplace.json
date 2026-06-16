@@ -264,10 +264,10 @@
       "category": "productivity",
       "source": {
         "source": "git-subdir",
-        "url": "https://github.com/A3IO/zapier-zapier-mcp.git",
+        "url": "https://github.com/zapier/zapier-mcp.git",
         "path": "plugins/zapier",
-        "ref": "jaine",
-        "sha": "034ed4be7e21047d743d534c37e9da2e5d993540"
+        "ref": "main",
+        "sha": "14340013c63448a6353d6edb84e7f87722cb0e42"
       },
       "homepage": "https://github.com/zapier/zapier-mcp/tree/main/plugins/zapier"
     },

@@ -107,7 +107,7 @@
       "source": {
         "source": "url",
         "url": "https://github.com/huggingface/skills.git",
-        "sha": "c68f1b08d9eb3af22cdc1d3fb60e9cdb78522556"
+        "sha": "ce5f615271cade006271fa7822c8ce2d984c4eda"
       },
       "homepage": "https://github.com/huggingface/skills.git"
     },
@@ -267,7 +267,7 @@
         "url": "https://github.com/zapier/zapier-mcp.git",
         "path": "plugins/zapier",
         "ref": "main",
-        "sha": "a5c750d54f28f5524c16b64007be1788811ba2e6"
+        "sha": "469b06007824bb859982a95d2dad5caec11e0bf1"
       },
       "homepage": "https://github.com/zapier/zapier-mcp/tree/main/plugins/zapier"
     },
@@ -341,7 +341,7 @@
       "source": {
         "source": "url",
         "url": "https://github.com/Digital-Process-Tools/claude-remember.git",
-        "sha": "a4ff96f38622f7c4920dc349d59cc980663336f4"
+        "sha": "02791ae02fce39217a360e53f3227183179814a9"
       },
       "homepage": "https://github.com/Digital-Process-Tools/claude-remember"
     },

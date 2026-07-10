@@ -107,7 +107,7 @@
       "source": {
         "source": "url",
         "url": "https://github.com/huggingface/skills.git",
-        "sha": "35e8c35a1ae5b462e0bb23d444d25569c3bb6700"
+        "sha": "7039bdcf4510c30ec932637e8b2c1646aee7f185"
       },
       "homepage": "https://github.com/huggingface/skills.git"
     },
@@ -221,7 +221,7 @@
       "source": {
         "source": "url",
         "url": "https://github.com/astronomer/agents.git",
-        "sha": "d33a14ddd4cd8045f90acfe49d2552120feeeced"
+        "sha": "a23ed1aff11840b8089d477dbf42b12be1011fa5"
       },
       "homepage": "https://github.com/astronomer/agents"
     },
@@ -331,7 +331,7 @@
       "source": {
         "source": "url",
         "url": "https://github.com/Digital-Process-Tools/claude-remember.git",
-        "sha": "9d7324957b4d6e92fd57d265a2685a363e93f63e"
+        "sha": "31626fd25e2c1194b3934c5ff91e38a9f8f7f906"
       },
       "homepage": "https://github.com/Digital-Process-Tools/claude-remember"
     },

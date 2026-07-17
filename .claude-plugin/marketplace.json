@@ -107,7 +107,7 @@
       "source": {
         "source": "url",
         "url": "https://github.com/huggingface/skills.git",
-        "sha": "7039bdcf4510c30ec932637e8b2c1646aee7f185"
+        "sha": "86cdeee824b73e504198b6005bb113552cdfa7ba"
       },
       "homepage": "https://github.com/huggingface/skills.git"
     },
@@ -221,7 +221,7 @@
       "source": {
         "source": "url",
         "url": "https://github.com/astronomer/agents.git",
-        "sha": "a23ed1aff11840b8089d477dbf42b12be1011fa5"
+        "sha": "5432198caa8ef9ec33218124bcd44016db2d31bf"
       },
       "homepage": "https://github.com/astronomer/agents"
     },
@@ -267,7 +267,7 @@
         "url": "https://github.com/zapier/zapier-mcp.git",
         "path": "plugins/zapier",
         "ref": "main",
-        "sha": "11bfb606bd1984beef15f6e16257f99ee47c7f29"
+        "sha": "217d65a980f9b75536babf89ba64bf03ad95beea"
       },
       "homepage": "https://github.com/zapier/zapier-mcp/tree/main/plugins/zapier"
     },
@@ -331,7 +331,7 @@
       "source": {
         "source": "url",
         "url": "https://github.com/Digital-Process-Tools/claude-remember.git",
-        "sha": "31626fd25e2c1194b3934c5ff91e38a9f8f7f906"
+        "sha": "7db78669853c2443c0bc841061e7ceb9f16d16cb"
       },
       "homepage": "https://github.com/Digital-Process-Tools/claude-remember"
     },

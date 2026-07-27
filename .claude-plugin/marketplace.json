@@ -326,16 +326,6 @@
       "homepage": "https://docs.voxel51.com/"
     },
     {
-      "name": "remember",
-      "description": "Continuous memory for Claude Code. Extracts, summarizes, and compresses conversations into tiered daily logs. Claude remembers what you did yesterday.",
-      "source": {
-        "source": "url",
-        "url": "https://github.com/Digital-Process-Tools/claude-remember.git",
-        "sha": "499787644f798a89d3cf8655977389c32d1fae02"
-      },
-      "homepage": "https://github.com/Digital-Process-Tools/claude-remember"
-    },
-    {
       "name": "session-report",
       "description": "Generate an explorable HTML report of Claude Code session usage (tokens, cache, subagents, skills, expensive prompts) from ~/.claude/projects transcripts.",
       "author": {

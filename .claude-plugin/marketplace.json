@@ -107,7 +107,7 @@
       "source": {
         "source": "url",
         "url": "https://github.com/huggingface/skills.git",
-        "sha": "86cdeee824b73e504198b6005bb113552cdfa7ba"
+        "sha": "87f9ee5b670a630b022809a8742606c6da21812c"
       },
       "homepage": "https://github.com/huggingface/skills.git"
     },
@@ -331,7 +331,7 @@
       "source": {
         "source": "url",
         "url": "https://github.com/Digital-Process-Tools/claude-remember.git",
-        "sha": "7db78669853c2443c0bc841061e7ceb9f16d16cb"
+        "sha": "499787644f798a89d3cf8655977389c32d1fae02"
       },
       "homepage": "https://github.com/Digital-Process-Tools/claude-remember"
     },

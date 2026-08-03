@@ -30,17 +30,6 @@
       "homepage": "https://github.com/anthropics/claude-plugins-official/tree/main/plugins/claude-code-setup"
     },
     {
-      "name": "claude-md-management",
-      "description": "Tools to maintain and improve CLAUDE.md files - audit quality, capture session learnings, and keep project memory current.",
-      "author": {
-        "name": "Anthropic",
-        "email": "support@anthropic.com"
-      },
-      "source": "./plugins/claude-md-management",
-      "category": "productivity",
-      "homepage": "https://github.com/anthropics/claude-plugins-official/tree/main/plugins/claude-md-management"
-    },
-    {
       "name": "code-review",
       "description": "Automated code review for pull requests using multiple specialized agents with confidence-based scoring to filter false positives",
       "author": {

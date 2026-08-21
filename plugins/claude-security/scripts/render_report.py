@@ -616,6 +616,7 @@ def render(run_dir: str, products_dir: str) -> Rendered:
         "run_shape": shape,
         "findings": {
             "total": len(findings),
+            "critical": counts["CRITICAL"],
             "high": counts["HIGH"],
             "medium": counts["MEDIUM"],
             "low": counts["LOW"],

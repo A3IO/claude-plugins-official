@@ -31,7 +31,8 @@ ID_PREFIX = "claude-security-plugin"
 FINGERPRINT_KEY = ID_PREFIX + "/v2"
 CONTEXT_LINES = 3
 SRCROOT = "%SRCROOT%"
-LEVEL = {"HIGH": "error", "MEDIUM": "warning", "LOW": "note"}
+# error is SARIF's highest level, so CRITICAL and HIGH both map to it.
+LEVEL = {"CRITICAL": "error", "HIGH": "error", "MEDIUM": "warning", "LOW": "note"}
 
 
 @dataclass(frozen=True)

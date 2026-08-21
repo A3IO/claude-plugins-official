@@ -38,7 +38,7 @@ class Finding(TypedDict):
     symbol: str
 
 
-SEVERITIES = ("HIGH", "MEDIUM", "LOW")
+SEVERITIES = ("CRITICAL", "HIGH", "MEDIUM", "LOW")
 CONFIDENCES = ("low", "medium", "high")
 CONFIDENCE_RANK = {"low": 1, "medium": 2, "high": 3}
 

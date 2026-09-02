@@ -57,17 +57,6 @@
       "source": "./external_plugins/fakechat"
     },
     {
-      "name": "feature-dev",
-      "description": "Comprehensive feature development workflow with specialized agents for codebase exploration, architecture design, and quality review",
-      "author": {
-        "name": "Anthropic",
-        "email": "support@anthropic.com"
-      },
-      "source": "./plugins/feature-dev",
-      "category": "development",
-      "homepage": "https://github.com/anthropics/claude-plugins-public/tree/main/plugins/feature-dev"
-    },
-    {
       "name": "frontend-design",
       "description": "Create distinctive, production-grade frontend interfaces with high design quality. Generates creative, polished code that avoids generic AI aesthetics.",
       "author": {

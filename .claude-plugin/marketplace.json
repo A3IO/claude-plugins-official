@@ -293,17 +293,6 @@
       "homepage": "https://github.com/anthropics/claude-plugins-official/tree/main/plugins/session-report"
     },
     {
-      "name": "mcp-tunnels",
-      "description": "Connect Claude to an MCP server running inside your private network through an Anthropic MCP tunnel \u2014 no inbound ports, no public exposure, no IP allowlisting on your origin.",
-      "author": {
-        "name": "Anthropic",
-        "email": "support@anthropic.com"
-      },
-      "source": "./plugins/mcp-tunnels",
-      "category": "development",
-      "homepage": "https://github.com/anthropics/claude-plugins-official/tree/main/plugins/mcp-tunnels"
-    },
-    {
       "name": "playwright",
       "description": "Browser automation and end-to-end testing MCP server by Microsoft. Enables Claude to interact with web pages, take screenshots, fill forms, click elements, and perform automated browser testing workflows.",
       "author": {

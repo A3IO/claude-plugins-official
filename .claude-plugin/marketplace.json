@@ -3427,6 +3427,24 @@
       "homepage": "https://github.com/slackapi/slack-mcp-plugin/tree/main"
     },
     {
+      "name": "small-business",
+      "displayName": "Small Business",
+      "description": "Pre-built small business workflows to help you run and grow your business. Supports a majority of the tools you already use. You approve every step that touches money or customers. Install and then ask Claude to help you get onboarded.",
+      "author": {
+        "name": "Anthropic",
+        "email": "support@anthropic.com"
+      },
+      "category": "productivity",
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/anthropics/knowledge-work-plugins.git",
+        "path": "small-business",
+        "ref": "main",
+        "sha": "3d99e004d06916952983ae17c18a0dec0cee0255"
+      },
+      "homepage": "https://github.com/anthropics/knowledge-work-plugins/tree/main/small-business"
+    },
+    {
       "name": "snowflake-cortex-code",
       "description": "Automatically route Snowflake prompts from Claude Code to Cortex Code for execution. Provides slash commands for code review and task delegation, plus skills for routing, run, and setup.",
       "author": {

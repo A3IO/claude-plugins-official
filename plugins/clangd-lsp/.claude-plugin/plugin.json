@@ -1,9 +1,0 @@
-{
-  "name": "clangd-lsp",
-  "version": "2026.02.25",
-  "description": "Clangd language server for C/C++ development",
-  "author": {
-    "name": "Anthropic",
-    "email": "support@anthropic.com"
-  }
-}

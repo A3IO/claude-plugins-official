@@ -1,9 +1,0 @@
-{
-  "name": "rust-analyzer-lsp",
-  "version": "2026.02.25",
-  "description": "Rust Analyzer language server for Rust development",
-  "author": {
-    "name": "Anthropic",
-    "email": "support@anthropic.com"
-  }
-}

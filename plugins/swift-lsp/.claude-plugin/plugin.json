@@ -1,9 +1,0 @@
-{
-  "name": "swift-lsp",
-  "version": "2026.02.25",
-  "description": "SourceKit-LSP language server for Swift development",
-  "author": {
-    "name": "Anthropic",
-    "email": "support@anthropic.com"
-  }
-}

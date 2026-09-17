@@ -1,9 +1,0 @@
-{
-  "name": "lua-lsp",
-  "version": "2026.02.25",
-  "description": "Lua language server for Lua development",
-  "author": {
-    "name": "Anthropic",
-    "email": "support@anthropic.com"
-  }
-}

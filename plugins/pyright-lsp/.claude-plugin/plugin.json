@@ -1,9 +1,0 @@
-{
-  "name": "pyright-lsp",
-  "version": "2026.02.25",
-  "description": "Pyright language server for Python type checking and code intelligence",
-  "author": {
-    "name": "Anthropic",
-    "email": "support@anthropic.com"
-  }
-}

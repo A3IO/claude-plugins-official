@@ -781,6 +781,34 @@
       "homepage": "https://github.com/ChromeDevTools/chrome-devtools-mcp"
     },
     {
+      "name": "chronograph-gp",
+      "description": "Portfolio monitoring, valuations and analytics for private-capital GP teams using the Chronograph connector: portfolio-company one-pagers, fund quarterly review packs, markup/markdown briefs, TVPI attribution and budget-vs-actuals. Requires a Chronograph account and the Chronograph connector.",
+      "author": {
+        "name": "Chronograph"
+      },
+      "category": "productivity",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/chronograph-pe/chronograph-gp-claude-plugin.git",
+        "sha": "35cb3d12cf4e24823c0efca4abe6f13c2fd0e5f5"
+      },
+      "homepage": "https://www.chronograph.pe/"
+    },
+    {
+      "name": "chronograph-lp",
+      "description": "Portfolio monitoring and analytics for private-capital LP teams using the Chronograph connector: cashflow forecasting, commitment pacing, look-through exposure scans and GP-meeting prep. Requires a Chronograph account and the Chronograph connector.",
+      "author": {
+        "name": "Chronograph"
+      },
+      "category": "productivity",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/chronograph-pe/chronograph-lp-claude-plugin.git",
+        "sha": "322b2d3fbd4db0a2eeed117e3b3c31522408ae6f"
+      },
+      "homepage": "https://www.chronograph.pe/"
+    },
+    {
       "name": "circle-skills",
       "description": "Ship stablecoin apps faster. Best-practice skills for USDC payments, cross-chain transfers, wallets, and smart contracts — plus Circle's MCP server for real-time SDK and documentation guidance.",
       "author": {

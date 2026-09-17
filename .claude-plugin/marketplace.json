@@ -4011,7 +4011,7 @@
       "source": {
         "source": "url",
         "url": "https://github.com/EpicGames/unreal-engine-skills-for-claude-code-plugin.git",
-        "sha": "d1b05809e4f089bd0ef174532c692fbcf1562eb7"
+        "sha": "a6aa73ada02a9fb1f5415bec491f9942c519b297"
       },
       "homepage": "https://dev.epicgames.com/documentation/unreal-engine/unreal-mcp-in-unreal-editor"
     },

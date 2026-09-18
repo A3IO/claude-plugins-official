@@ -4334,6 +4334,21 @@
         "sha": "9529e72715d96ab47738e8edf83d49798d0f8be5"
       },
       "homepage": "https://www.dynatrace.com/hub/detail/claude-code-cli/"
+    },
+    {
+      "name": "wingspan",
+      "displayName": "Wingspan",
+      "description": "Ask Claude about the contractors you pay through Wingspan, what you owe them, and what is holding up a payment, then onboard contractors and log payments as drafts, with a preview before anything is written. Requires a Wingspan account; bundles the Wingspan MCP server (OAuth on first use).",
+      "author": {
+        "name": "Wingspan"
+      },
+      "category": "productivity",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/wingspanHQ/mcp-claude-plugin.git",
+        "sha": "b989f3b303a1f605955291e34ed29b755bf436e1"
+      },
+      "homepage": "https://github.com/wingspanHQ/mcp-claude-plugin"
     }
   ]
 }

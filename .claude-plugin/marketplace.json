@@ -1910,6 +1910,22 @@
       "source": "./external_plugins/imessage"
     },
     {
+      "name": "incident-io",
+      "description": "Work with incident.io from Claude: respond to and investigate incidents, check on-call schedules and escalations, and author the runbooks, skills and architecture docs that incident.io investigations draw on. Bundles the official incident.io MCP server (OAuth on first use).",
+      "author": {
+        "name": "incident.io"
+      },
+      "category": "monitoring",
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/incident-io/skills.git",
+        "path": "plugins/incident-io",
+        "ref": "main",
+        "sha": "6d0bbfc9e52256fc39326b9ba6d08f16831b60ae"
+      },
+      "homepage": "https://incident.io"
+    },
+    {
       "name": "informatica-for-claude-platform",
       "description": "Governed catalog discovery for Informatica Intelligent Data Management Cloud (CDGC): find tables, columns, files, glossary terms and policies across the enterprise catalog, check ownership, certification, sensitivity and applicable policy, and get safe-usage guidance grounded in catalog metadata before querying any data. Requires an Informatica IDMC tenant and the Informatica Catalog Discovery connector.",
       "author": {

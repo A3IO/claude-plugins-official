@@ -3132,7 +3132,7 @@
         "source": "url",
         "url": "https://github.com/RevenueCat/rc-claude-code-plugin.git",
         "path": "revenuecat",
-        "sha": "7bf32f6bf40f790c259b8c3bb9be68dc6ef76105"
+        "sha": "ac20d26b35be0d01d0dbd3130c1b34932d402e5d"
       },
       "homepage": "https://www.revenuecat.com"
     },
@@ -3159,7 +3159,7 @@
         "url": "https://github.com/redis/agent-skills.git",
         "path": "plugins/redis-development",
         "ref": "main",
-        "sha": "172fb9effa139cd7432ac29a9ee81c45943e5a28"
+        "sha": "a84871d065f398fed55e1633f66b66f731eb4e2b"
       },
       "homepage": "https://redis.io"
     },
@@ -3197,7 +3197,7 @@
       "source": {
         "source": "url",
         "url": "https://github.com/resend/resend-skills.git",
-        "sha": "8938c2a6f17903f9168c31431c842c68a68b19f3"
+        "sha": "8fd369f2f590c411f3092a02971bab59d827b00a"
       },
       "homepage": "https://resend.com"
     },
@@ -3209,7 +3209,7 @@
         "source": "url",
         "url": "https://github.com/RevenueCat/rc-claude-code-plugin.git",
         "path": "revenuecat",
-        "sha": "7bf32f6bf40f790c259b8c3bb9be68dc6ef76105"
+        "sha": "ac20d26b35be0d01d0dbd3130c1b34932d402e5d"
       },
       "homepage": "https://www.revenuecat.com"
     },
@@ -3223,7 +3223,7 @@
       "source": {
         "source": "url",
         "url": "https://github.com/rilldata/agent-skills.git",
-        "sha": "440e4081f2f56e1a130a5c679f75a0826a611264"
+        "sha": "a0a211654875ce8a113a2a5c4915dc01b3d38658"
       },
       "homepage": "https://docs.rilldata.com/developers/build/ai-configuration"
     },
@@ -3308,7 +3308,7 @@
         "url": "https://github.com/awslabs/agent-plugins.git",
         "path": "plugins/sagemaker-ai",
         "ref": "main",
-        "sha": "bab56a3b9991aa0c6857b05198a61ba14a60bce4"
+        "sha": "097fe8ad56d8a1d5e2c81d7880adf145553cf244"
       },
       "homepage": "https://github.com/awslabs/agent-plugins"
     },
@@ -3354,7 +3354,7 @@
       "source": {
         "source": "url",
         "url": "https://github.com/cap-js/mcp-server.git",
-        "sha": "79e4546395a52b1a3881d828118a1b3a2e198876"
+        "sha": "129236ccdfe252fffa276ec0bad9ff7db91b2c89"
       },
       "homepage": "https://cap.cloud.sap/"
     },
@@ -3372,7 +3372,7 @@
         "url": "https://github.com/SAP/open-ux-tools.git",
         "path": "packages/fiori-mcp-server",
         "ref": "main",
-        "sha": "31c1263fb76e1737dcb0a6d163c967d8f8126ddd"
+        "sha": "69e2c50833f10e6892d7c8f42b98b13133d8fdc3"
       },
       "homepage": "https://github.com/SAP/open-ux-tools/tree/main/packages/fiori-mcp-server"
     },
@@ -3404,7 +3404,7 @@
       "source": {
         "source": "url",
         "url": "https://github.com/SAP/mdk-mcp-server.git",
-        "sha": "68efb00cd62a905748c98c8533fecff2f3ff4a00"
+        "sha": "ce65cbf22089787599370938f43ca4b9f4567027"
       },
       "homepage": "https://help.sap.com/docs/MDK"
     },
@@ -3486,7 +3486,7 @@
         "url": "https://github.com/getsentry/cli.git",
         "path": "packages/cli/plugins/sentry-cli",
         "ref": "main",
-        "sha": "936c2cdc2ac13978ca9a843b24a0583e9309af8e"
+        "sha": "488952e144fddc4c26ed54e9065a62550e36bac7"
       },
       "homepage": "https://sentry.io"
     },
@@ -3512,7 +3512,7 @@
         "url": "https://github.com/ServiceNow/sdk.git",
         "path": "providers/claude/plugin",
         "ref": "master",
-        "sha": "f3e0379242b29e0039e1625d637aa1c246acbe12"
+        "sha": "6f01c0e26cbe597b8a129de0bd2706ec1c0e327c"
       },
       "homepage": "https://servicenow.github.io/sdk/"
     },
@@ -3571,7 +3571,7 @@
         "url": "https://github.com/goshippo/ai.git",
         "path": "providers/claude/plugin",
         "ref": "main",
-        "sha": "15cbb6364fbcfd465a134f5972da9179436d0787"
+        "sha": "cf8e96532f243883ff84f6d4035e72884b46d132"
       },
       "homepage": "https://docs.goshippo.com"
     },
@@ -3637,7 +3637,7 @@
       "source": {
         "source": "url",
         "url": "https://github.com/SonarSource/sonarqube-agent-plugins.git",
-        "sha": "f05d5f9890da8eb602c1aa24123e92c697ee6f2e"
+        "sha": "f194f77ab688c2a82b74a7c50023c552899c21ed"
       },
       "homepage": "https://www.sonarsource.com"
     },
@@ -3684,7 +3684,7 @@
       "source": {
         "source": "url",
         "url": "https://github.com/spotify/ads-claude-plugin.git",
-        "sha": "ae7efbeb6f46a10a706234670487c3b5775b969e"
+        "sha": "532b47af3d2eb10708b38733d07a5b1433c17e82"
       },
       "homepage": "https://github.com/spotify/ads-claude-plugin"
     },
@@ -3790,7 +3790,7 @@
       "source": {
         "source": "url",
         "url": "https://github.com/obra/superpowers.git",
-        "sha": "b36e0829c6d0140e93cfef2ca599b1b07d4a7797"
+        "sha": "5bf4e78011075bcfc0dc295f0724994cd123ee71"
       },
       "homepage": "https://github.com/obra/superpowers.git"
     },
@@ -4136,7 +4136,7 @@
       "source": {
         "source": "url",
         "url": "https://github.com/wix/skills.git",
-        "sha": "9c48e3f65cc869868d617c5995cf852cc71f64af"
+        "sha": "8fc544d319c4a4dfc7ccf3ba4adf328e1fa9866f"
       },
       "homepage": "https://dev.wix.com/docs/wix-cli/guides/development/about-wix-skills"
     },
@@ -4162,7 +4162,7 @@
         "url": "https://github.com/workos/skills.git",
         "path": "plugins/workos",
         "ref": "main",
-        "sha": "6b7d596ae28fb0bf2ecc01a8737e4bdcc70f7ab8"
+        "sha": "e25141bae047a7c837d93817347f95977598720f"
       },
       "homepage": "https://workos.com"
     },
@@ -4176,7 +4176,7 @@
       "source": {
         "source": "url",
         "url": "https://github.com/youdotcom-oss/agent-skills.git",
-        "sha": "08f3d80e7ca9518ccc64b38b365a78cc4a762691"
+        "sha": "a692b6f34fac566c72bc7fcc6cafbd7c0f7889c1"
       },
       "homepage": "https://you.com"
     },
@@ -4189,7 +4189,7 @@
         "url": "https://github.com/zapier/zapier-mcp.git",
         "path": "plugins/zapier",
         "ref": "main",
-        "sha": "217d65a980f9b75536babf89ba64bf03ad95beea"
+        "sha": "5360f152b96735712e5f925ad728732cb86888df"
       },
       "homepage": "https://github.com/zapier/zapier-mcp/tree/main/plugins/zapier"
     },
@@ -4285,7 +4285,7 @@
       "source": {
         "source": "url",
         "url": "https://github.com/zytedata/claude-skills.git",
-        "sha": "8b2d640fe82fadcb69c12af26e4e38ab8ab61ed1"
+        "sha": "d03e241729ebc3bf397e4303d654e8189b9e8185"
       },
       "homepage": "https://www.zyte.com"
     },

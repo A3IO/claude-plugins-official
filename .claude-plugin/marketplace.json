@@ -121,7 +121,7 @@
         "url": "https://github.com/airwallex/airwallex-marketplace.git",
         "path": "plugins/airwallex-agentos",
         "ref": "master",
-        "sha": "d323dd68c85874f6311a1bd20184f803a96e09a9"
+        "sha": "b418b9913e4919f85257aa1e25319e59464e8fae"
       },
       "homepage": "https://www.airwallex.com/docs"
     },
@@ -137,7 +137,7 @@
         "url": "https://github.com/airwallex/airwallex-marketplace.git",
         "path": "plugins/airwallex-dev",
         "ref": "master",
-        "sha": "d4593e33a9e1177a44b895ca0a1d6e015215736f"
+        "sha": "b418b9913e4919f85257aa1e25319e59464e8fae"
       },
       "homepage": "https://www.airwallex.com/docs"
     },
@@ -704,7 +704,7 @@
         "url": "https://github.com/carta/plugins.git",
         "path": "plugins/carta-cap-table",
         "ref": "main",
-        "sha": "12bb447e186f52c20aee6588761498f2acf76fc3"
+        "sha": "e0b245f0621c5333ecae47a256c851c4b2e79cb4"
       },
       "homepage": "https://carta.com"
     },
@@ -720,7 +720,7 @@
         "url": "https://github.com/carta/plugins.git",
         "path": "plugins/carta-crm",
         "ref": "main",
-        "sha": "81b8f40844bd646842538a4583409f9aa54c42db"
+        "sha": "9970737943d11af5de5ebaae592aed42bcdc6ae7"
       },
       "homepage": "https://carta.com"
     },
@@ -736,7 +736,7 @@
         "url": "https://github.com/carta/plugins.git",
         "path": "plugins/carta-investors",
         "ref": "main",
-        "sha": "12bb447e186f52c20aee6588761498f2acf76fc3"
+        "sha": "e0b245f0621c5333ecae47a256c851c4b2e79cb4"
       },
       "homepage": "https://carta.com"
     },
@@ -926,7 +926,7 @@
         "url": "https://github.com/clay-run/agent-plugins.git",
         "path": "clay",
         "ref": "main",
-        "sha": "86f0471654c2c855ad0346cd30a74c0f4ca85d7f"
+        "sha": "769514a3a23683fcc7cbbf32067538d17e465381"
       },
       "homepage": "https://github.com/clay-run/agent-plugins/tree/main/clay"
     },
@@ -1312,7 +1312,7 @@
         "url": "https://github.com/databricks/databricks-agent-skills.git",
         "path": "plugins/databricks/claude",
         "ref": "main",
-        "sha": "0fbf9ba4cdb2fd5a0efd952e8225acc1d5099809"
+        "sha": "e77e37e8a4dabbe2662b680c180bb72a05eca48d"
       },
       "homepage": "https://developers.databricks.com/"
     },
@@ -1368,7 +1368,7 @@
       "source": {
         "source": "url",
         "url": "https://github.com/datarobot-oss/datarobot-agent-skills.git",
-        "sha": "e6dddbe327dc2c83e9b7677a5577d33a1063feaf"
+        "sha": "44a57d315afd36a9f2b192fde70ceb2a53e69316"
       },
       "homepage": "https://datarobot.com"
     },
@@ -1575,7 +1575,7 @@
       "source": {
         "source": "url",
         "url": "https://github.com/figma/mcp-server-guide.git",
-        "sha": "d638a5e055e8d95e0394a94350860398cf424b74"
+        "sha": "172920731eedf414e9b22ae60017d9a5b6c9f81f"
       },
       "homepage": "https://github.com/figma/mcp-server-guide"
     },
@@ -1818,7 +1818,7 @@
         "url": "https://github.com/honeycombio/agent-skill.git",
         "path": "honeycomb",
         "ref": "main",
-        "sha": "41214b7dfb97f262adabf295fa6f0fcad85bc0f6"
+        "sha": "b169d7d1c76ab93809064226b9682efb563bed34"
       },
       "homepage": "https://www.honeycomb.io"
     },
@@ -1922,7 +1922,7 @@
         "url": "https://github.com/incident-io/skills.git",
         "path": "plugins/incident-io",
         "ref": "main",
-        "sha": "6d0bbfc9e52256fc39326b9ba6d08f16831b60ae"
+        "sha": "443f47164eda1f93108ebd908843925f681954ef"
       },
       "homepage": "https://incident.io"
     },
@@ -1999,7 +1999,7 @@
       "source": {
         "source": "url",
         "url": "https://github.com/jfrog/claude-plugin.git",
-        "sha": "c4049d7ca5a745afed97368ab7d65e146c450673"
+        "sha": "188d59b986742a01ffd677ebebe938f1ed35b689"
       },
       "homepage": "https://jfrog.com"
     },
@@ -2073,7 +2073,7 @@
       "source": {
         "source": "url",
         "url": "https://github.com/Leadfeeder/leadfeeder-mcp-plugin.git",
-        "sha": "f344f4383363199963c34a0c353e09d26596d501"
+        "sha": "cddf27f0771393b01a9a91335b8972e44f48cf45"
       },
       "homepage": "https://www.leadfeeder.com"
     },
@@ -2357,7 +2357,7 @@
         "url": "https://github.com/mercadopago/mercadopago-claude-marketplace.git",
         "path": "plugins/mercadopago",
         "ref": "main",
-        "sha": "c0d06959afc90b2f3d637c35eeb51c36f512c005"
+        "sha": "755d33740af23351b4ca7043c51077ce67ebf4d1"
       },
       "homepage": "https://github.com/mercadopago/mercadopago-claude-marketplace/tree/main/plugins/mercadopago"
     },
@@ -2425,7 +2425,7 @@
         "url": "https://github.com/miroapp/miro-ai.git",
         "path": "claude-plugins/miro",
         "ref": "main",
-        "sha": "c2494b24510d01ec3e50fad94a0c5fc3ca40e339"
+        "sha": "b6408e1bdfe0c842f209d40b52e92caf118a4d39"
       },
       "homepage": "https://miro.com"
     },
@@ -2469,7 +2469,7 @@
         "url": "https://github.com/mondaycom/mcp.git",
         "path": "plugins/monday-crm",
         "ref": "master",
-        "sha": "5eb0835e921de42ba603d7a8315ab4a2575a46b2"
+        "sha": "8fdc0b4af07a4b7e1059ca3f8320d64968737b8e"
       },
       "homepage": "https://monday.com"
     },
@@ -2648,7 +2648,7 @@
         "url": "https://github.com/NVIDIA/skills.git",
         "path": "plugins/nvidia-skills",
         "ref": "main",
-        "sha": "2455514388e984b7e5a78a30e928f39d1401f16b"
+        "sha": "8c2a4ca03c385b80f9e6cd624007d56a19d14e81"
       },
       "homepage": "https://build.nvidia.com/skills/"
     },
@@ -2751,7 +2751,7 @@
       "source": {
         "source": "url",
         "url": "https://github.com/paypal/AI-Toolkit.git",
-        "sha": "310b4962f0e5b3d09ff1c909d96ad5e226703ecb"
+        "sha": "fb672f6fce64c81911df59b8cd00bfd4db2de307"
       },
       "homepage": "https://developer.paypal.com/"
     },
@@ -2767,7 +2767,7 @@
         "url": "https://github.com/pendo-io/claude-pendo-plugin.git",
         "path": "plugins/pendo-analytics",
         "ref": "main",
-        "sha": "a08842848e416be803e99184130aefca6ec9afd3"
+        "sha": "340d503c23eed487be83693aa4c1837df4a7dcd4"
       },
       "homepage": "https://github.com/pendo-io/claude-pendo-plugin/tree/main/plugins/pendo-analytics"
     },
@@ -2783,7 +2783,7 @@
         "url": "https://github.com/pendo-io/claude-pendo-plugin.git",
         "path": "plugins/pendo-guides",
         "ref": "main",
-        "sha": "a4699be3608ba134d8c7aa4b53e220cfde1c6aac"
+        "sha": "340d503c23eed487be83693aa4c1837df4a7dcd4"
       },
       "homepage": "https://github.com/pendo-io/claude-pendo-plugin/tree/main/plugins/pendo-guides"
     },
@@ -2799,7 +2799,7 @@
         "url": "https://github.com/pendo-io/claude-pendo-plugin.git",
         "path": "plugins/pendo-orchestrate",
         "ref": "main",
-        "sha": "a4699be3608ba134d8c7aa4b53e220cfde1c6aac"
+        "sha": "340d503c23eed487be83693aa4c1837df4a7dcd4"
       },
       "homepage": "https://github.com/pendo-io/claude-pendo-plugin/tree/main/plugins/pendo-orchestrate"
     },
@@ -2933,7 +2933,7 @@
       "source": {
         "source": "url",
         "url": "https://github.com/Postman-Devrel/postman-claude-code-plugin.git",
-        "sha": "c85c881c68c9b6338b5b75e989a79d61e76c51a0"
+        "sha": "1e5f49ee91c3604bc3590c5602f664e0e4bfc1fd"
       },
       "homepage": "https://learning.postman.com/docs/developer/postman-mcp-server/"
     },
@@ -3050,7 +3050,7 @@
         "url": "https://github.com/qodo-ai/qodo-skills.git",
         "path": "packages/qodo",
         "ref": "main",
-        "sha": "79019ff7a574383d7146502ec5ffe7f7437a55d6"
+        "sha": "7dd3e7ec7706005651a3f7adb014d9ff8f2d52ea"
       },
       "homepage": "https://github.com/qodo-ai/qodo-skills.git"
     },
@@ -3068,7 +3068,7 @@
         "url": "https://github.com/qodo-ai/qodo-skills.git",
         "path": "packages/qodo-standards",
         "ref": "main",
-        "sha": "79019ff7a574383d7146502ec5ffe7f7437a55d6"
+        "sha": "7dd3e7ec7706005651a3f7adb014d9ff8f2d52ea"
       },
       "homepage": "https://github.com/qodo-ai/qodo-skills.git"
     },
@@ -3324,7 +3324,7 @@
         "url": "https://github.com/forcedotcom/sf-skills.git",
         "path": "plugins/builder/salesforce-development",
         "ref": "main",
-        "sha": "7e04d4744792ae2defb7f4da24fe85cbdf6f6e5a"
+        "sha": "c217b703b3e5a3c279f1a510d8703161b14bd0a5"
       },
       "homepage": "https://github.com/forcedotcom/sf-skills/tree/main/plugins/builder/salesforce-development"
     },
@@ -3539,7 +3539,7 @@
         "url": "https://github.com/pendo-io/claude-pendo-plugin.git",
         "path": "plugins/setup-agent-analytics",
         "ref": "main",
-        "sha": "a4699be3608ba134d8c7aa4b53e220cfde1c6aac"
+        "sha": "340d503c23eed487be83693aa4c1837df4a7dcd4"
       },
       "homepage": "https://github.com/pendo-io/claude-pendo-plugin/tree/main/plugins/setup-agent-analytics"
     },
@@ -3555,7 +3555,7 @@
         "url": "https://github.com/pendo-io/claude-pendo-plugin.git",
         "path": "plugins/setup-mcp-agent-analytics",
         "ref": "main",
-        "sha": "a4699be3608ba134d8c7aa4b53e220cfde1c6aac"
+        "sha": "340d503c23eed487be83693aa4c1837df4a7dcd4"
       },
       "homepage": "https://github.com/pendo-io/claude-pendo-plugin/tree/main/plugins/setup-mcp-agent-analytics"
     },
@@ -3585,7 +3585,7 @@
       "source": {
         "source": "url",
         "url": "https://github.com/Shopify/Shopify-AI-Toolkit.git",
-        "sha": "c6a219bf99fc5aa2576843f3c8a005f9da863383"
+        "sha": "57e293be70c7b754429b392e054105272433729d"
       },
       "homepage": "https://shopify.dev"
     },
@@ -3743,7 +3743,7 @@
         "url": "https://github.com/stripe/ai.git",
         "path": "providers/claude/plugin",
         "ref": "main",
-        "sha": "da4991b0a0b9299d423ae2d5856e6d7e2b31b031"
+        "sha": "97b2164821c378f246c3903852057b36a8bd0296"
       },
       "homepage": "https://github.com/stripe/ai/tree/main/providers/claude/plugin"
     },
@@ -4014,7 +4014,7 @@
       "source": {
         "source": "url",
         "url": "https://github.com/Unity-Technologies/unity-agent-plugin.git",
-        "sha": "5ad4bafc1d91acfdeca800bfbae0072fcc7aeb58"
+        "sha": "ba48956ae8bee4ef8a3ef3d75dec03c16aa5cc89"
       },
       "homepage": "https://unity.com"
     },
@@ -4083,7 +4083,7 @@
       "source": {
         "source": "url",
         "url": "https://github.com/vercel/vercel-plugin.git",
-        "sha": "9ca8770143395d69606573e122c456566d6f419b"
+        "sha": "882e66c2698689324c341b7bb8fd8beb92c27bf6"
       },
       "homepage": "https://github.com/vercel/vercel-plugin"
     },
@@ -4271,7 +4271,7 @@
       "source": {
         "source": "url",
         "url": "https://github.com/langfuse/skills.git",
-        "sha": "ab83111ed644c583a9ce963de773dbfbf09aebf3"
+        "sha": "b8cc05c307ffd220cfd7e91225fb983b0ab86e95"
       },
       "homepage": "https://langfuse.com"
     },
@@ -4347,7 +4347,7 @@
       "source": {
         "source": "url",
         "url": "https://github.com/wingspanHQ/mcp-claude-plugin.git",
-        "sha": "b989f3b303a1f605955291e34ed29b755bf436e1"
+        "sha": "01f2b0806fc91d0550859a7f840db353d1edd4e9"
       },
       "homepage": "https://github.com/wingspanHQ/mcp-claude-plugin"
     }

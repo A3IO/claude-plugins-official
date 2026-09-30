@@ -252,16 +252,6 @@
       "homepage": "https://github.com/sonatype/sonatype-guide-claude-plugin.git"
     },
     {
-      "name": "postman",
-      "description": "Full API lifecycle management for Claude Code. Sync collections, generate client code, discover APIs, run tests, create mocks, publish docs, and audit security. Powered by the Postman MCP Server.",
-      "category": "development",
-      "source": {
-        "source": "url",
-        "url": "https://github.com/Postman-Devrel/postman-claude-code-plugin.git"
-      },
-      "homepage": "https://learning.postman.com/docs/developer/postman-mcp-server/"
-    },
-    {
       "name": "fiftyone",
       "description": "Build high-quality datasets and computer vision models. Visualize datasets, analyze models, find duplicates, run inference, evaluate predictions, and develop custom plugins.",
       "source": {

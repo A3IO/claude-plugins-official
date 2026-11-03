@@ -134,16 +134,6 @@
       "homepage": "https://github.com/anthropics/claude-plugins-official/tree/main/plugins/skill-creator"
     },
     {
-      "name": "superpowers",
-      "description": "Superpowers teaches Claude brainstorming, subagent driven development with built in code review, systematic debugging, and red/green TDD. Additionally, it teaches Claude how to author and test new skills.",
-      "category": "development",
-      "source": {
-        "source": "url",
-        "url": "https://github.com/obra/superpowers.git"
-      },
-      "homepage": "https://github.com/obra/superpowers.git"
-    },
-    {
       "name": "telegram",
       "description": "Telegram messaging bridge with built-in access control. Manage pairing, allowlists, and policy via /telegram:access.",
       "category": "productivity",

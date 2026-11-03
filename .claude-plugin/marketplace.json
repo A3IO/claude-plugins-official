@@ -30,17 +30,6 @@
       "homepage": "https://github.com/anthropics/claude-plugins-official/tree/main/plugins/claude-code-setup"
     },
     {
-      "name": "commit-commands",
-      "description": "Commands for git commit workflows including commit, push, and PR creation",
-      "author": {
-        "name": "Anthropic",
-        "email": "support@anthropic.com"
-      },
-      "source": "./plugins/commit-commands",
-      "category": "productivity",
-      "homepage": "https://github.com/anthropics/claude-plugins-public/tree/main/plugins/commit-commands"
-    },
-    {
       "name": "context7",
       "description": "Upstash Context7 MCP server for up-to-date documentation lookup. Pull version-specific documentation and code examples directly from source repositories into your LLM context.",
       "category": "development",

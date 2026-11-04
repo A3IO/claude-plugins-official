@@ -101,17 +101,6 @@
       "homepage": "https://github.com/anthropics/claude-plugins-public/tree/main/plugins/ralph-loop"
     },
     {
-      "name": "security-guidance",
-      "description": "Security reminder hook that warns about potential security issues when editing files, including command injection, XSS, and unsafe code patterns",
-      "author": {
-        "name": "Anthropic",
-        "email": "support@anthropic.com"
-      },
-      "source": "./plugins/security-guidance",
-      "category": "security",
-      "homepage": "https://github.com/anthropics/claude-plugins-public/tree/main/plugins/security-guidance"
-    },
-    {
       "name": "skill-creator",
       "description": "Create new skills, improve existing skills, and measure skill performance. Use when users want to create a skill from scratch, update or optimize an existing skill, run evals to test a skill, or benchmark skill performance with variance analysis.",
       "author": {

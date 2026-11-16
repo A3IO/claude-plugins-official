@@ -383,6 +383,26 @@
           }
         }
       }
+    },
+    {
+      "name": "swift-lsp",
+      "description": "Swift language server (SourceKit-LSP) for code intelligence",
+      "version": "1.0.0",
+      "author": {
+        "name": "Anthropic",
+        "email": "support@anthropic.com"
+      },
+      "source": "./plugins/swift-lsp",
+      "category": "development",
+      "strict": false,
+      "lspServers": {
+        "sourcekit-lsp": {
+          "command": "sourcekit-lsp",
+          "extensionToLanguage": {
+            ".swift": "swift"
+          }
+        }
+      }
     }
   ]
 }

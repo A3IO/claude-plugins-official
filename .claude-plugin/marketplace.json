@@ -227,6 +227,29 @@
       "source": "./external_plugins/playwright",
       "category": "development",
       "homepage": "https://github.com/anthropics/claude-plugins-official/tree/main/external_plugins/playwright"
+    },
+    {
+      "name": "php-lsp",
+      "description": "PHP language server (Intelephense) for code intelligence",
+      "version": "1.0.0",
+      "author": {
+        "name": "Anthropic",
+        "email": "support@anthropic.com"
+      },
+      "source": "./plugins/php-lsp",
+      "category": "development",
+      "strict": false,
+      "lspServers": {
+        "intelephense": {
+          "command": "intelephense",
+          "args": [
+            "--stdio"
+          ],
+          "extensionToLanguage": {
+            ".php": "php"
+          }
+        }
+      }
     }
   ]
 }

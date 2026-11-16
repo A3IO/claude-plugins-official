@@ -229,26 +229,6 @@
       "homepage": "https://github.com/anthropics/claude-plugins-official/tree/main/external_plugins/playwright"
     },
     {
-      "name": "lua-lsp",
-      "description": "Lua language server for code intelligence",
-      "version": "1.0.0",
-      "author": {
-        "name": "Anthropic",
-        "email": "support@anthropic.com"
-      },
-      "source": "./plugins/lua-lsp",
-      "category": "development",
-      "strict": false,
-      "lspServers": {
-        "lua": {
-          "command": "lua-language-server",
-          "extensionToLanguage": {
-            ".lua": "lua"
-          }
-        }
-      }
-    },
-    {
       "name": "rust-analyzer-lsp",
       "description": "Rust language server for code intelligence and analysis",
       "version": "1.0.0",

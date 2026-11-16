@@ -229,26 +229,6 @@
       "homepage": "https://github.com/anthropics/claude-plugins-official/tree/main/external_plugins/playwright"
     },
     {
-      "name": "swift-lsp",
-      "description": "Swift language server (SourceKit-LSP) for code intelligence",
-      "version": "1.0.0",
-      "author": {
-        "name": "Anthropic",
-        "email": "support@anthropic.com"
-      },
-      "source": "./plugins/swift-lsp",
-      "category": "development",
-      "strict": false,
-      "lspServers": {
-        "sourcekit-lsp": {
-          "command": "sourcekit-lsp",
-          "extensionToLanguage": {
-            ".swift": "swift"
-          }
-        }
-      }
-    },
-    {
       "name": "typescript-lsp",
       "description": "TypeScript/JavaScript language server for enhanced code intelligence",
       "version": "1.0.0",

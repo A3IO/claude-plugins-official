@@ -229,26 +229,6 @@
       "homepage": "https://github.com/anthropics/claude-plugins-official/tree/main/external_plugins/playwright"
     },
     {
-      "name": "rust-analyzer-lsp",
-      "description": "Rust language server for code intelligence and analysis",
-      "version": "1.0.0",
-      "author": {
-        "name": "Anthropic",
-        "email": "support@anthropic.com"
-      },
-      "source": "./plugins/rust-analyzer-lsp",
-      "category": "development",
-      "strict": false,
-      "lspServers": {
-        "rust-analyzer": {
-          "command": "rust-analyzer",
-          "extensionToLanguage": {
-            ".rs": "rust"
-          }
-        }
-      }
-    },
-    {
       "name": "swift-lsp",
       "description": "Swift language server (SourceKit-LSP) for code intelligence",
       "version": "1.0.0",

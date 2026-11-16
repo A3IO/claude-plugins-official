@@ -229,26 +229,6 @@
       "homepage": "https://github.com/anthropics/claude-plugins-official/tree/main/external_plugins/playwright"
     },
     {
-      "name": "csharp-lsp",
-      "description": "C# language server for code intelligence",
-      "version": "1.0.0",
-      "author": {
-        "name": "Anthropic",
-        "email": "support@anthropic.com"
-      },
-      "source": "./plugins/csharp-lsp",
-      "category": "development",
-      "strict": false,
-      "lspServers": {
-        "csharp-ls": {
-          "command": "csharp-ls",
-          "extensionToLanguage": {
-            ".cs": "csharp"
-          }
-        }
-      }
-    },
-    {
       "name": "gopls-lsp",
       "description": "Go language server for code intelligence and refactoring",
       "version": "1.0.0",
